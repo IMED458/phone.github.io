@@ -5,15 +5,7 @@
   <title>Medical Directory</title>
   <script src="/_sdk/element_sdk.js"></script>
   <style>
-    /* ფერთა პალიტრა:
-    --primary-blue: #0077b6; (საშუალო ლურჯი)
-    --dark-blue: #023e8a; (ღრმა ლურჯი - ტექსტი/სათაური)
-    --light-blue: #00b4d8; (ღია ლურჯი - აქცენტი/სპეციალობა)
-    --bg-light: #f8f9fa; (ძალიან ღია ნაცრისფერი/თეთრი)
-    --border-light: #e0eaf4; (ღია ცისფერი საზღვარი)
-    --white: #ffffff;
-    */
-
+    /* ფერთა პალიტრა: */
     :root {
         --primary-blue: #0077b6;
         --dark-blue: #023e8a;
@@ -23,6 +15,7 @@
         --text-color: var(--dark-blue);
         --secondary-text-color: var(--light-blue);
         --border-color: var(--primary-blue);
+        --error-red: #dc3545; /* წითელი შეცდომისთვის */
     }
 
     body {
@@ -82,7 +75,7 @@
       min-width: 250px;
     }
 
-    .search-box input, .filter-box select {
+    .search-box input, .filter-box select, #auth-password-input {
       width: 100%;
       padding: 12px 16px;
       border: 1px solid #ced4da;
@@ -94,7 +87,7 @@
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
-    .search-box input:focus, .filter-box select:focus {
+    .search-box input:focus, .filter-box select:focus, #auth-password-input:focus {
       outline: none;
       border-color: var(--primary-blue);
       box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
@@ -271,8 +264,57 @@
       font-weight: 500;
     }
 
+    /* --- AUTH SCREEN STYLES --- */
+    .auth-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(2, 62, 138, 0.95); /* Semi-transparent dark blue overlay */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .auth-box {
+        background: var(--white);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+    }
+
+    .auth-box h2 {
+        color: var(--dark-blue);
+        margin-top: 0;
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .auth-box button {
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #auth-error-message {
+        color: var(--error-red);
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        min-height: 20px;
+    }
+
     /* Print Styles */
     @media print {
+      .auth-overlay {
+        display: none !important;
+      }
       .controls,
       .action-buttons,
       .sort-controls,
@@ -348,37 +390,53 @@
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body>
-  <div class="container">
-   <header>
-    <h1 id="clinic-title">თბილისის სახელმწიფო სამედიცინო უნივერსტიტეტისა და ინგოროყვას მაღალი სამედიცინო ტექნოლოგიების საუნივერსიტეტო კლინიკა</h1>
-    <p class="subtitle" id="clinic-subtitle">ექიმების სატელეფონო სია</p>
-   </header>
-   <div class="controls">
-    <div class="search-box">
-     <input type="text" id="search-input" placeholder="ძებნა სახელით ან გვარით..." aria-label="Search doctors by name">
+    <div id="auth-overlay" class="auth-overlay">
+        <div class="auth-box">
+            <h2>ავტორიზაცია</h2>
+            <p style="color: var(--dark-blue); font-size: 15px; margin-bottom: 25px;">დირექტორიის სანახავად შეიყვანეთ პაროლი</p>
+            <input type="password" id="auth-password-input" placeholder="პაროლი" aria-label="Enter password">
+            <div id="auth-error-message"></div>
+            <button id="auth-login-btn">შესვლა</button>
+        </div>
     </div>
-    <div class="filter-box">
-     <label for="specialty-filter" style="display: none;">Filter by specialty</label>
-     <select id="specialty-filter" aria-label="Filter by specialty">
-      <option value="">ყველა სპეციალობა</option>
-     </select>
+    
+    <div id="main-content" style="display: none;">
+        <div class="container">
+            <header>
+                <h1 id="clinic-title">თბილისის სახელმწიფო სამედიცინო უნივერსტიტეტისა და ინგოროყვას მაღალი სამედიცინო ტექნოლოგიების საუნივერსიტეტო კლინიკა</h1>
+                <p class="subtitle" id="clinic-subtitle">ექიმების სატელეფონო სია</p>
+            </header>
+            <div class="controls">
+                <div class="search-box">
+                    <input type="text" id="search-input" placeholder="ძებნა სახელით ან გვარით..." aria-label="Search doctors by name">
+                </div>
+                <div class="filter-box">
+                    <label for="specialty-filter" style="display: none;">Filter by specialty</label>
+                    <select id="specialty-filter" aria-label="Filter by specialty">
+                        <option value="">ყველა სპეციალობა</option>
+                    </select>
+                </div>
+                <div class="action-buttons">
+                    <button id="refresh-btn" aria-label="Refresh data"><span id="refresh-text">განახლება</span></button>
+                    <button id="print-btn" onclick="window.print()" aria-label="Print directory"><span id="print-text">ბეჭდვა</span></button>
+                </div>
+            </div>
+            <div class="sort-controls">
+                <button class="sort-btn active" id="sort-name" aria-label="Sort by name">A → Z (სახელი)</button>
+                <button class="sort-btn" id="sort-specialty" aria-label="Sort by specialty">სპეციალობა</button>
+            </div>
+            <div id="loading" class="loading" style="display: none;"><span class="spinner"></span> მონაცემები იტვირთება...</div>
+            <div id="doctors-list" class="doctors-list"></div>
+            <div id="no-results" class="no-results" style="display: none;">
+                შედეგები არ მოიძებნა
+            </div>
+        </div>
     </div>
-    <div class="action-buttons">
-     <button id="refresh-btn" aria-label="Refresh data"><span id="refresh-text">განახლება</span></button>
-     <button id="print-btn" onclick="window.print()" aria-label="Print directory"><span id="print-text">ბეჭდვა</span></button>
-    </div>
-   </div>
-   <div class="sort-controls">
-    <button class="sort-btn active" id="sort-name" aria-label="Sort by name">A → Z (სახელი)</button>
-    <button class="sort-btn" id="sort-specialty" aria-label="Sort by specialty">სპეციალობა</button>
-   </div>
-   <div id="loading" class="loading" style="display: none;"><span class="spinner"></span> მონაცემები იტვირთება...</div>
-   <div id="doctors-list" class="doctors-list"></div>
-   <div id="no-results" class="no-results" style="display: none;">
-    შედეგები არ მოიძებნა
-   </div>
-  </div>
   <script>
+    // --- AUTHENTICATION CONFIGURATION ---
+    const CORRECT_PASSWORD = "med123"; // <-- შეცვალეთ ეს პაროლით, რომელიც გსურთ!
+    
+    // --- ORIGINAL CONFIG & DATA ---
     const defaultConfig = {
       clinic_title: 'სამედიცინო დირექტორია',
       clinic_subtitle: 'ექიმების სატელეფონო სია',
@@ -408,9 +466,9 @@
       { name: 'მანანა გოგოლაძე', specialty: 'ექოსკოპია', phone: '577 450 049' },
       { name: 'ანა ინგოროყვა', specialty: 'ექოსკოპია', phone: '599 222 201' },
       { name: 'მარიამ გავაშელი', specialty: 'ექოსკოპია', phone: '544 447 346' },
+      { name: 'თამარ გოგელია', specialty: 'ექოსკოპია', phone: '557 424 363' },
       { name: 'ბელა ანთიძე', specialty: 'ექოსკოპია', phone: '595 245 500' },
       { name: 'ირინა მოდებაძე', specialty: 'ექოსკოპია', phone: '577 090 967' },
-      { name: 'თამარ გოგელია', specialty: 'ექოსკოპია', phone: '557 424 363' },
       { name: 'ლაბორატორია', specialty: 'ლაბორატორია', phone: '577 101 949' },
       { name: 'ირაკლი დევიძე', specialty: 'ყბა-სახის ქირურგია', phone: '597 03 05 40' },
       { name: 'გიორგი გვენეტაძე', specialty: 'ყბა-სახის ქირურგია', phone: '599 62 99 91' },
@@ -528,6 +586,35 @@
       { name: 'თინათინ ნაფეტვარიძე', specialty: 'კარდიოლოგია', phone: '598 358 522' }
     ];
 
+    // --- AUTHENTICATION LOGIC ---
+    function handleLogin() {
+        const passwordInput = document.getElementById('auth-password-input');
+        const errorMessage = document.getElementById('auth-error-message');
+        
+        if (passwordInput.value === CORRECT_PASSWORD) {
+            document.getElementById('auth-overlay').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('auth-overlay').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                fetchDoctors(); // Load data only after successful login
+            }, 300);
+        } else {
+            errorMessage.textContent = 'არასწორი პაროლი! სცადეთ ხელახლა.';
+            passwordInput.value = ''; // Clear input on failure
+            passwordInput.focus();
+        }
+    }
+
+    // Attach event listeners for login
+    document.getElementById('auth-login-btn').addEventListener('click', handleLogin);
+    document.getElementById('auth-password-input').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleLogin();
+        }
+    });
+
+    // --- DIRECTORY FUNCTIONS (Unchanged from previous version, just moved) ---
+
     async function onConfigChange(newConfig) {
       config = { ...config, ...newConfig };
       
@@ -535,22 +622,20 @@
       const customFont = config.font_family || defaultConfig.font_family;
       const baseFontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
       
-      // Update CSS variables globally or on body/root for easier management of custom properties
       document.documentElement.style.setProperty('--primary-blue', config.primary_color || defaultConfig.primary_color);
       document.documentElement.style.setProperty('--dark-blue', config.text_color || defaultConfig.text_color);
       document.documentElement.style.setProperty('--light-blue', config.secondary_text_color || defaultConfig.secondary_text_color);
       document.documentElement.style.setProperty('--bg-light', config.background_color || defaultConfig.background_color);
       document.documentElement.style.setProperty('--border-color', config.border_color || defaultConfig.border_color);
       
-      // Apply configuration to elements
       document.getElementById('clinic-title').textContent = config.clinic_title || defaultConfig.clinic_title;
       document.getElementById('clinic-title').style.fontFamily = `${customFont}, ${baseFontStack}`;
-      document.getElementById('clinic-title').style.fontSize = `${baseSize * 2 + 4}px`; // Adjusted size
+      document.getElementById('clinic-title').style.fontSize = `${baseSize * 2 + 4}px`;
       document.getElementById('clinic-title').style.color = config.text_color || defaultConfig.text_color;
       
       document.getElementById('clinic-subtitle').textContent = config.clinic_subtitle || defaultConfig.clinic_subtitle;
       document.getElementById('clinic-subtitle').style.fontFamily = `${customFont}, ${baseFontStack}`;
-      document.getElementById('clinic-subtitle').style.fontSize = `${baseSize + 2}px`; // Adjusted size
+      document.getElementById('clinic-subtitle').style.fontSize = `${baseSize + 2}px`;
       document.getElementById('clinic-subtitle').style.color = config.secondary_text_color || defaultConfig.secondary_text_color;
       
       document.getElementById('refresh-text').textContent = config.refresh_button_text || defaultConfig.refresh_button_text;
@@ -560,7 +645,6 @@
       document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
       document.body.style.fontSize = `${baseSize}px`;
       
-      // Re-render to apply card specific styles based on new config
       renderDoctors();
     }
 
@@ -641,7 +725,6 @@
       refreshBtn.disabled = true;
       
       try {
-        // Simulate network delay
         await new Promise(resolve => setTimeout(resolve, 800));
         allDoctors = [...sampleDoctors];
         
@@ -654,7 +737,7 @@
         renderDoctors();
       } finally {
         loadingEl.style.display = 'none';
-        listEl.style.display = 'grid'; // Ensure grid display is set if results exist
+        // Note: listEl display is set in renderDoctors based on results
         refreshBtn.disabled = false;
       }
     }
@@ -663,7 +746,6 @@
       const specialties = [...new Set(allDoctors.map(d => d.specialty))].sort((a, b) => a.localeCompare(b.name, 'ka'));
       const filterEl = document.getElementById('specialty-filter');
       
-      // Save current value before clearing
       const currentValue = filterEl.value;
 
       filterEl.innerHTML = '<option value="">ყველა სპეციალობა</option>';
@@ -674,7 +756,6 @@
         filterEl.appendChild(option);
       });
       
-      // Restore previous value if it still exists
       if (currentValue && specialties.includes(currentValue)) {
           filterEl.value = currentValue;
       }
@@ -709,7 +790,6 @@
       noResultsEl.style.display = 'none';
       listEl.innerHTML = '';
       
-      // Get current config values (for dynamic styling inside the loop)
       const baseSize = config.font_size || defaultConfig.font_size;
       const customFont = config.font_family || defaultConfig.font_family;
       const baseFontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
@@ -733,7 +813,7 @@
         specialty.className = 'doctor-specialty';
         specialty.textContent = doctor.specialty;
         specialty.style.fontFamily = `${customFont}, ${baseFontStack}`;
-        specialty.style.fontSize = `${baseSize - 1}px`; // Slightly smaller for specialty
+        specialty.style.fontSize = `${baseSize - 1}px`; 
         specialty.style.color = secondaryTextColor;
         
         const phone = document.createElement('div');
@@ -744,10 +824,8 @@
         const phoneLink = document.createElement('a');
         phoneLink.href = `tel:+995${doctor.phone.replace(/\s/g, '')}`;
         phoneLink.textContent = doctor.phone;
-        phoneLink.style.color = borderColor; // Use border color for link for consistency
+        phoneLink.style.color = borderColor; 
         phoneLink.style.borderBottomColor = borderColor;
-        
-        // Add hover effect style dynamically if needed, but CSS handles it better
         
         phone.appendChild(phoneLink);
         card.appendChild(name);
@@ -757,7 +835,7 @@
       });
     }
 
-    // Event Listeners
+    // Event Listeners for Directory (Only activate after successful login)
     document.getElementById('search-input').addEventListener('input', renderDoctors);
     document.getElementById('specialty-filter').addEventListener('change', renderDoctors);
     
@@ -786,9 +864,11 @@
         mapToEditPanelValues
       });
     }
-
-    // Initial load
-    fetchDoctors();
+    
+    // Initial Focus on Password Input
+    document.getElementById('auth-password-input').focus();
+    
+    // NOTE: fetchDoctors is called ONLY after successful login (in handleLogin function)
   </script>
  </body>
 </html>
