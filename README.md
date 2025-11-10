@@ -393,7 +393,7 @@
     <div id="auth-overlay" class="auth-overlay">
         <div class="auth-box">
             <h2>ავტორიზაცია</h2>
-            <p style="color: var(--dark-blue); font-size: 15px; margin-bottom: 25px;">დირექტორიის სანახავად შეიყვანეთ პაროლი</p>
+            <p style="color: var(--white); font-size: 15px; margin-bottom: 25px;">დირექტორიის სანახავად შეიყვანეთ პაროლი</p>
             <input type="password" id="auth-password-input" placeholder="პაროლი" aria-label="Enter password">
             <div id="auth-error-message"></div>
             <button id="auth-login-btn">შესვლა</button>
@@ -434,7 +434,7 @@
     </div>
   <script>
     // --- AUTHENTICATION CONFIGURATION ---
-    const CORRECT_PASSWORD = "med123"; // <-- შეცვალეთ ეს პაროლით, რომელიც გსურთ!
+    const CORRECT_PASSWORD = "Htmc2025"; // <-- შეცვალეთ ეს პაროლით, რომელიც გსურთ!
     
     // --- ORIGINAL CONFIG & DATA ---
     const defaultConfig = {
