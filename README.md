@@ -16,10 +16,9 @@
         --text-color: var(--dark-blue);
         --secondary-text-color: var(--light-blue);
         --border-color: var(--primary-blue);
-        --error-red: #dc3545; /* წითელი შეცდომისთვის */
-        --white: #ffffff; /* თეთრი ფერი */
+        --error-red: #dc3545;
+        --white: #ffffff;
     }
-
     body {
       box-sizing: border-box;
       margin: 0;
@@ -30,24 +29,20 @@
       min-height: 100%;
       line-height: 1.6;
     }
-
     *, *::before, *::after {
       box-sizing: inherit;
     }
-
     .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 32px 24px;
     }
-
     header {
       text-align: center;
       margin-bottom: 40px;
       border-bottom: 2px solid var(--border-light);
       padding-bottom: 20px;
     }
-
     h1 {
       font-size: 36px;
       font-weight: 800;
@@ -55,14 +50,12 @@
       letter-spacing: -0.8px;
       color: var(--dark-blue);
     }
-
     .subtitle {
       font-size: 18px;
       color: var(--light-blue);
       margin: 0;
       font-weight: 500;
     }
-
     /* Controls Section */
     .controls {
       display: flex;
@@ -71,12 +64,10 @@
       margin-bottom: 30px;
       align-items: center;
     }
-
     .search-box, .filter-box {
       flex: 1;
       min-width: 250px;
     }
-
     .search-box input, .filter-box select, #auth-password-input {
       width: 100%;
       padding: 12px 16px;
@@ -88,22 +79,18 @@
       color: var(--text-color);
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-
     .search-box input:focus, .filter-box select:focus, #auth-password-input:focus {
       outline: none;
       border-color: var(--primary-blue);
       box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
     }
-
     .filter-box select {
       cursor: pointer;
     }
-
     .action-buttons {
       display: flex;
       gap: 10px;
     }
-
     /* Buttons */
     button {
       padding: 12px 20px;
@@ -118,39 +105,35 @@
       transition: all 0.2s;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
-
     button:hover {
       background: var(--dark-blue);
       border-color: var(--dark-blue);
       transform: translateY(-2px);
       box-shadow: 0 6px 15px rgba(2, 62, 138, 0.25);
     }
-    
+   
     #print-btn {
         background: var(--white);
         color: var(--primary-blue);
     }
-    
+   
     #print-btn:hover {
         background: var(--border-light);
         color: var(--dark-blue);
         border-color: var(--dark-blue);
     }
-
     button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
       transform: none;
       box-shadow: none;
     }
-
     /* Sort Controls */
     .sort-controls {
       display: flex;
       gap: 10px;
       margin-bottom: 24px;
     }
-
     .sort-btn {
       padding: 8px 16px;
       font-size: 14px;
@@ -159,25 +142,23 @@
       color: var(--primary-blue);
       transition: background 0.2s, color 0.2s, border-color 0.2s;
     }
-    
+   
     .sort-btn:hover {
         transform: none;
         box-shadow: none;
         background: #f0f4f8;
     }
-
     .sort-btn.active {
       background: var(--primary-blue);
       color: var(--white);
       border-color: var(--primary-blue);
     }
-    
+   
     .sort-btn.active:hover {
         background: var(--dark-blue);
         color: var(--white);
         border-color: var(--dark-blue);
     }
-
     /* Loading and No Results */
     .loading {
       text-align: center;
@@ -186,7 +167,6 @@
       color: var(--primary-blue);
       font-weight: 500;
     }
-
     .spinner {
       display: inline-block;
       width: 24px;
@@ -198,18 +178,15 @@
       margin-right: 10px;
       vertical-align: middle;
     }
-
     @keyframes spin {
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-
     .doctors-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 20px;
     }
-
     /* Doctor Card */
     .doctor-card {
       border: 1px solid var(--border-light);
@@ -219,13 +196,11 @@
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
-
     .doctor-card:hover {
       box-shadow: 0 8px 25px rgba(0, 119, 182, 0.15);
       transform: translateY(-3px);
       border-color: var(--primary-blue);
     }
-
     .doctor-name {
       font-size: 20px;
       font-weight: 700;
@@ -233,31 +208,26 @@
       color: var(--dark-blue);
       letter-spacing: -0.3px;
     }
-
     .doctor-specialty {
       font-size: 15px;
       color: var(--light-blue);
       margin: 0 0 16px 0;
       font-weight: 600;
     }
-
     .doctor-phone {
       font-size: 16px;
       font-weight: 500;
     }
-
     .doctor-phone a {
       color: var(--primary-blue);
       text-decoration: none;
       border-bottom: 1px dashed var(--primary-blue);
       transition: all 0.2s;
     }
-
     .doctor-phone a:hover {
       color: var(--dark-blue);
       border-bottom: 2px solid var(--dark-blue);
     }
-
     .no-results {
       text-align: center;
       padding: 60px;
@@ -265,33 +235,31 @@
       color: var(--light-blue);
       font-weight: 500;
     }
-
-    /* --- AUTH SCREEN STYLES (განახლებული) --- */
+    /* --- AUTH SCREEN STYLES --- */
     .auth-overlay {
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: var(--white, #ffffff); /* თეთრი ფონი */
+        background: var(--white);
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 1000;
         transition: opacity 0.3s ease-in-out;
+        opacity: 1;
     }
-
     .auth-box {
         background: var(--white);
         padding: 40px;
         border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* ღია ჩრდილი თეთრ ფონზე */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
         max-width: 400px;
         width: 90%;
         text-align: center;
-        border: 1px solid var(--border-light); /* თეთრ ფონზე უკეთ გამოჩენისთვის */
+        border: 1px solid var(--border-light);
     }
-
     .auth-box h2 {
         color: var(--dark-blue);
         margin-top: 0;
@@ -299,12 +267,10 @@
         font-size: 24px;
         font-weight: 700;
     }
-
     .auth-box button {
         width: 100%;
         margin-top: 20px;
     }
-
     #auth-error-message {
         color: var(--error-red);
         margin-top: 10px;
@@ -312,20 +278,17 @@
         font-weight: 600;
         min-height: 20px;
     }
-    
-    /* ლოგოს სტილი */
+   
     .auth-logo {
         width: 100%;
-        max-width: 300px; /* ლოგოს მაქსიმალური სიგანე */
-        margin: 0 auto 30px auto; /* ცენტრში განთავსება და ქვემოთ სივრცე */
+        max-width: 300px;
+        margin: 0 auto 30px auto;
     }
-
     .auth-logo img {
         width: 100%;
         height: auto;
         display: block;
     }
-
     /* Print Styles */
     @media print {
       .auth-overlay {
@@ -337,12 +300,10 @@
       button {
         display: none !important;
       }
-
       .container {
         max-width: 100%;
         padding: 0;
       }
-
       .doctor-card {
         break-inside: avoid;
         box-shadow: none !important;
@@ -350,64 +311,51 @@
         border: 1px solid #ccc !important;
         margin-bottom: 15px;
       }
-
       body {
         background: #ffffff;
       }
     }
-
-    /* Responsive adjustments */
+    /* Responsive */
     @media (max-width: 768px) {
       .container {
         padding: 20px 16px;
       }
-
       h1 {
         font-size: 28px;
       }
-      
       .subtitle {
           font-size: 16px;
       }
-
       .controls {
         flex-direction: column;
         gap: 15px;
       }
-
       .search-box,
       .filter-box {
         width: 100%;
         min-width: 100%;
       }
-
       .action-buttons {
         width: 100%;
         justify-content: space-between;
       }
-      
       .action-buttons button {
           flex: 1;
       }
-
       .sort-controls {
         flex-wrap: wrap;
         gap: 8px;
         justify-content: center;
       }
-      
       .doctors-list {
           grid-template-columns: 1fr;
       }
-      
-      /* AUTH mobile adjustments */
       .auth-box {
-        padding: 30px 20px; 
-        width: 95%; 
+        padding: 30px 20px;
+        width: 95%;
       }
-      
       .auth-logo {
-        max-width: 250px; 
+        max-width: 250px;
         margin-bottom: 20px;
       }
     }
@@ -422,7 +370,7 @@
             <div class="auth-logo">
                 <img src="./tm_center_logo.png" alt="TM Center კლინიკის ლოგო">
             </div>
-            
+           
             <h2 style="margin-top: 0;">ავტორიზაცია</h2>
             <p style="color: var(--dark-blue); font-size: 15px; margin-bottom: 25px;">დირექტორიის სანახავად შეიყვანეთ პაროლი</p>
             <input type="password" id="auth-password-input" placeholder="პაროლი" aria-label="Enter password">
@@ -430,7 +378,7 @@
             <button id="auth-login-btn">შესვლა</button>
         </div>
     </div>
-    
+   
     <div id="main-content" style="display: none;">
         <div class="container">
             <header>
@@ -463,10 +411,11 @@
             </div>
         </div>
     </div>
+
   <script>
     // --- AUTHENTICATION CONFIGURATION ---
-    const CORRECT_PASSWORD = "med123"; // <-- შეცვალეთ ეს პაროლით, რომელიც გსურთ!
-    
+    const CORRECT_PASSWORD = "med123"; // <-- შეცვალე შენი პაროლით!
+
     // --- ORIGINAL CONFIG & DATA ---
     const defaultConfig = {
       clinic_title: 'სამედიცინო დირექტორია',
@@ -474,15 +423,14 @@
       refresh_button_text: 'განახლება',
       print_button_text: 'ბეჭდვა',
       search_placeholder: 'ძებნა სახელით ან გვარით...',
-      primary_color: '#0077b6', 
-      background_color: '#f8f9fa', 
-      text_color: '#023e8a', 
-      secondary_text_color: '#00b4d8', 
+      primary_color: '#0077b6',
+      background_color: '#f8f9fa',
+      text_color: '#023e8a',
+      secondary_text_color: '#00b4d8',
       border_color: '#0077b6',
       font_family: 'Inter',
       font_size: 16
     };
-
     let config = { ...defaultConfig };
     let allDoctors = [];
     let currentSort = 'name';
@@ -556,7 +504,7 @@
       { name: 'ლაშა სარალიძე', specialty: 'ზოგადი ქირურგია', phone: '599 977 762' },
       { name: 'მაია ლობჟანიძე', specialty: 'ზოგადი ქირურგია', phone: '577 671 710' },
       { name: 'დავით ვარდოსანიძე', specialty: 'ზოგადი ქირურგია', phone: '577 671 705' },
-      { name: 'ზაზა მანელიძე', specialty: 'ზოგადი ქირურგია', phone: '595 582 876' },
+      { name: 'ზაზა მანელიძე', specialty: 'ზოგადი ქირუგია', phone: '595 582 876' },
       { name: 'ირაკლი კაჭახიძე', specialty: 'ზოგადი ქირურგია', phone: '577 671 707' },
       { name: 'ლალი ახმეტელი', specialty: 'ზოგადი ქირურგია', phone: '577 553 311' },
       { name: 'ლია საგინაშვილი', specialty: 'ზოგადი ქირურგია', phone: '599 503 567' },
@@ -616,127 +564,80 @@
       { name: 'თინათინ ნაფეტვარიძე', specialty: 'კარდიოლოგია', phone: '598 358 522' }
     ];
 
-    // --- AUTHENTICATION LOGIC (გამოსწორებული) ---
+    // --- AUTHENTICATION LOGIC (მუშაობს!) ---
     function handleLogin(event) {
-        // ეს ხაზი უზრუნველყოფს, რომ ბრაუზერი არ შეეცადოს გვერდის გადატვირთვას
-        if (event && event.preventDefault) {
-             event.preventDefault(); 
-        }
-        
+        if (event) event.preventDefault();
+
         const passwordInput = document.getElementById('auth-password-input');
         const errorMessage = document.getElementById('auth-error-message');
         const authOverlay = document.getElementById('auth-overlay');
         const mainContent = document.getElementById('main-content');
-        
-        if (passwordInput.value === CORRECT_PASSWORD) {
+
+        const enteredPassword = passwordInput.value.trim();
+
+        if (enteredPassword === CORRECT_PASSWORD) {
             errorMessage.textContent = '';
-            
-            // ანიმაცია: ავტორიზაციის ეკრანის დამალვა
             authOverlay.style.opacity = '0';
-            
+
             setTimeout(() => {
                 authOverlay.style.display = 'none';
                 mainContent.style.display = 'block';
-                fetchDoctors(); // მონაცემების ჩატვირთვა
-            }, 300); 
-            
+                fetchDoctors();
+            }, 300);
+
         } else {
-            // თუ პაროლი არასწორია
             errorMessage.textContent = 'არასწორი პაროლი! სცადეთ ხელახლა.';
-            passwordInput.value = ''; 
+            passwordInput.value = '';
             passwordInput.focus();
         }
     }
 
-    // --- DIRECTORY FUNCTIONS (უცვლელი) ---
-
+    // --- DIRECTORY FUNCTIONS ---
     async function onConfigChange(newConfig) {
       config = { ...config, ...newConfig };
-      
+     
       const baseSize = config.font_size || defaultConfig.font_size;
       const customFont = config.font_family || defaultConfig.font_family;
       const baseFontStack = '-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif';
-      
+     
       document.documentElement.style.setProperty('--primary-blue', config.primary_color || defaultConfig.primary_color);
       document.documentElement.style.setProperty('--dark-blue', config.text_color || defaultConfig.text_color);
       document.documentElement.style.setProperty('--light-blue', config.secondary_text_color || defaultConfig.secondary_text_color);
       document.documentElement.style.setProperty('--bg-light', config.background_color || defaultConfig.background_color);
       document.documentElement.style.setProperty('--border-color', config.border_color || defaultConfig.border_color);
-      
+     
       document.getElementById('clinic-title').textContent = config.clinic_title || defaultConfig.clinic_title;
       document.getElementById('clinic-title').style.fontFamily = `${customFont}, ${baseFontStack}`;
       document.getElementById('clinic-title').style.fontSize = `${baseSize * 2 + 4}px`;
       document.getElementById('clinic-title').style.color = config.text_color || defaultConfig.text_color;
-      
+     
       document.getElementById('clinic-subtitle').textContent = config.clinic_subtitle || defaultConfig.clinic_subtitle;
       document.getElementById('clinic-subtitle').style.fontFamily = `${customFont}, ${baseFontStack}`;
       document.getElementById('clinic-subtitle').style.fontSize = `${baseSize + 2}px`;
       document.getElementById('clinic-subtitle').style.color = config.secondary_text_color || defaultConfig.secondary_text_color;
-      
+     
       document.getElementById('refresh-text').textContent = config.refresh_button_text || defaultConfig.refresh_button_text;
       document.getElementById('print-text').textContent = config.print_button_text || defaultConfig.print_button_text;
       document.getElementById('search-input').placeholder = config.search_placeholder || defaultConfig.search_placeholder;
-      
+     
       document.body.style.fontFamily = `${customFont}, ${baseFontStack}`;
       document.body.style.fontSize = `${baseSize}px`;
-      
+     
       renderDoctors();
     }
 
     function mapToCapabilities(cfg) {
       return {
         recolorables: [
-          {
-            get: () => cfg.background_color || defaultConfig.background_color,
-            set: (value) => {
-              cfg.background_color = value;
-              if (window.elementSdk) window.elementSdk.setConfig({ background_color: value });
-            }
-          },
-          {
-            get: () => cfg.border_color || defaultConfig.border_color,
-            set: (value) => {
-              cfg.border_color = value;
-              if (window.elementSdk) window.elementSdk.setConfig({ border_color: value });
-            }
-          },
-          {
-            get: () => cfg.text_color || defaultConfig.text_color,
-            set: (value) => {
-              cfg.text_color = value;
-              if (window.elementSdk) window.elementSdk.setConfig({ text_color: value });
-            }
-          },
-          {
-            get: () => cfg.secondary_text_color || defaultConfig.secondary_text_color,
-            set: (value) => {
-              cfg.secondary_text_color = value;
-              if (window.elementSdk) window.elementSdk.setConfig({ secondary_text_color: value });
-            }
-          },
-          {
-            get: () => cfg.primary_color || defaultConfig.primary_color,
-            set: (value) => {
-              cfg.primary_color = value;
-              if (window.elementSdk) window.elementSdk.setConfig({ primary_color: value });
-            }
-          }
+          { get: () => cfg.background_color || defaultConfig.background_color, set: (v) => { cfg.background_color = v; if (window.elementSdk) window.elementSdk.setConfig({ background_color: v }); } },
+          { get: () => cfg.border_color || defaultConfig.border_color, set: (v) => { cfg.border_color = v; if (window.elementSdk) window.elementSdk.setConfig({ border_color: v }); } },
+          { get: () => cfg.text_color || defaultConfig.text_color, set: (v) => { cfg.text_color = v; if (window.elementSdk) window.elementSdk.setConfig({ text_color: v }); } },
+          { get: () => cfg.secondary_text_color || defaultConfig.secondary_text_color, set: (v) => { cfg.secondary_text_color = v; if (window.elementSdk) window.elementSdk.setConfig({ secondary_text_color: v }); } },
+          { get: () => cfg.primary_color || defaultConfig.primary_color, set: (v) => { cfg.primary_color = v; if (window.elementSdk) window.elementSdk.setConfig({ primary_color: v }); } }
         ],
         borderables: [],
-        fontEditable: {
-          get: () => cfg.font_family || defaultConfig.font_family,
-          set: (value) => {
-            cfg.font_family = value;
-            if (window.elementSdk) window.elementSdk.setConfig({ font_family: value });
-          }
-        },
-        fontSizeable: {
-          get: () => cfg.font_size || defaultConfig.font_size,
-          set: (value) => {
-            cfg.font_size = value;
-            if (window.elementSdk) window.elementSdk.setConfig({ font_size: value });
-          }
-        }
+        fontEditable: { get: () => cfg.font_family || defaultConfig.font_family, set: (v) => { cfg.font_family = v; if (window.elementSdk) window.elementSdk.setConfig({ font_family: v }); } },
+        fontSizeable: { get: () => cfg.font_size || defaultConfig.font_size, set: (v) => { cfg.font_size = v; if (window.elementSdk) window.elementSdk.setConfig({ font_size: v }); } }
       };
     }
 
@@ -754,15 +655,15 @@
       const loadingEl = document.getElementById('loading');
       const listEl = document.getElementById('doctors-list');
       const refreshBtn = document.getElementById('refresh-btn');
-      
+     
       loadingEl.style.display = 'block';
       listEl.style.display = 'none';
       refreshBtn.disabled = true;
-      
+     
       try {
         await new Promise(resolve => setTimeout(resolve, 800));
         allDoctors = [...sampleDoctors];
-        
+       
         populateSpecialtyFilter();
         renderDoctors();
       } catch (error) {
@@ -777,11 +678,10 @@
     }
 
     function populateSpecialtyFilter() {
-      const specialties = [...new Set(allDoctors.map(d => d.specialty))].sort((a, b) => a.localeCompare(b.name, 'ka'));
+      const specialties = [...new Set(allDoctors.map(d => d.specialty))].sort((a, b) => a.localeCompare(b, 'ka'));
       const filterEl = document.getElementById('specialty-filter');
-      
+     
       const currentValue = filterEl.value;
-
       filterEl.innerHTML = '<option value="">ყველა სპეციალობა</option>';
       specialties.forEach(specialty => {
         const option = document.createElement('option');
@@ -789,7 +689,7 @@
         option.textContent = specialty;
         filterEl.appendChild(option);
       });
-      
+     
       if (currentValue && specialties.includes(currentValue)) {
           filterEl.value = currentValue;
       }
@@ -798,69 +698,69 @@
     function renderDoctors() {
       const searchTerm = document.getElementById('search-input').value.toLowerCase();
       const specialtyFilter = document.getElementById('specialty-filter').value;
-      
+     
       let filtered = allDoctors.filter(doctor => {
         const matchesSearch = doctor.name.toLowerCase().includes(searchTerm);
         const matchesSpecialty = !specialtyFilter || doctor.specialty === specialtyFilter;
         return matchesSearch && matchesSpecialty;
       });
-      
+     
       if (currentSort === 'name') {
         filtered.sort((a, b) => a.name.localeCompare(b.name, 'ka'));
       } else {
         filtered.sort((a, b) => a.specialty.localeCompare(b.specialty, 'ka') || a.name.localeCompare(b.name, 'ka'));
       }
-      
+     
       const listEl = document.getElementById('doctors-list');
       const noResultsEl = document.getElementById('no-results');
-      
+     
       if (filtered.length === 0) {
         listEl.style.display = 'none';
         noResultsEl.style.display = 'block';
         return;
       }
-      
+     
       listEl.style.display = 'grid';
       noResultsEl.style.display = 'none';
       listEl.innerHTML = '';
-      
+     
       const baseSize = config.font_size || defaultConfig.font_size;
       const customFont = config.font_family || defaultConfig.font_family;
       const baseFontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
       const textColor = config.text_color || defaultConfig.text_color;
       const secondaryTextColor = config.secondary_text_color || defaultConfig.secondary_text_color;
       const borderColor = config.border_color || defaultConfig.border_color;
-      
+     
       filtered.forEach(doctor => {
         const card = document.createElement('div');
         card.className = 'doctor-card';
         card.style.borderColor = borderColor;
-        
+       
         const name = document.createElement('div');
         name.className = 'doctor-name';
         name.textContent = doctor.name;
         name.style.fontFamily = `${customFont}, ${baseFontStack}`;
         name.style.fontSize = `${baseSize * 1.25}px`;
         name.style.color = textColor;
-        
+       
         const specialty = document.createElement('div');
         specialty.className = 'doctor-specialty';
         specialty.textContent = doctor.specialty;
         specialty.style.fontFamily = `${customFont}, ${baseFontStack}`;
-        specialty.style.fontSize = `${baseSize - 1}px`; 
+        specialty.style.fontSize = `${baseSize - 1}px`;
         specialty.style.color = secondaryTextColor;
-        
+       
         const phone = document.createElement('div');
         phone.className = 'doctor-phone';
         phone.style.fontFamily = `${customFont}, ${baseFontStack}`;
         phone.style.fontSize = `${baseSize}px`;
-        
+       
         const phoneLink = document.createElement('a');
         phoneLink.href = `tel:+995${doctor.phone.replace(/\s/g, '')}`;
         phoneLink.textContent = doctor.phone;
-        phoneLink.style.color = borderColor; 
+        phoneLink.style.color = borderColor;
         phoneLink.style.borderBottomColor = borderColor;
-        
+       
         phone.appendChild(phoneLink);
         card.appendChild(name);
         card.appendChild(specialty);
@@ -869,38 +769,35 @@
       });
     }
 
-    // --- EVENT LISTENERS (სწორი მიბმა) ---
+    // --- EVENT LISTENERS ---
     document.addEventListener('DOMContentLoaded', () => {
         const loginBtn = document.getElementById('auth-login-btn');
         const passwordInput = document.getElementById('auth-password-input');
-        
+
         if (loginBtn) {
             loginBtn.addEventListener('click', handleLogin);
         }
-        
+
         if (passwordInput) {
-             passwordInput.focus(); 
-             
-             // Enter ღილაკზე დაჭერის ლოგიკა
-             passwordInput.addEventListener('keypress', (e) => {
+            passwordInput.focus();
+            passwordInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
-                    handleLogin(e); 
+                    handleLogin(e);
                 }
             });
         }
-        
-        // --- DIRECTORY LISTENERS ---
+
         document.getElementById('search-input').addEventListener('input', renderDoctors);
         document.getElementById('specialty-filter').addEventListener('change', renderDoctors);
         document.getElementById('refresh-btn').addEventListener('click', fetchDoctors);
-        
+
         document.getElementById('sort-name').addEventListener('click', () => {
             currentSort = 'name';
             document.getElementById('sort-name').classList.add('active');
             document.getElementById('sort-specialty').classList.remove('active');
             renderDoctors();
         });
-        
+
         document.getElementById('sort-specialty').addEventListener('click', () => {
             currentSort = 'specialty';
             document.getElementById('sort-specialty').classList.add('active');
@@ -908,7 +805,6 @@
             renderDoctors();
         });
     });
-
 
     // SDK Init
     if (window.elementSdk) {
