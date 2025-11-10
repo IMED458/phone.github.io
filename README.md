@@ -264,42 +264,58 @@
       font-weight: 500;
     }
 
-    /* --- AUTH SCREEN STYLES --- */
-    .auth-overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(2, 62, 138, 0.95); /* Semi-transparent dark blue overlay */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1000;
-        transition: opacity 0.3s ease-in-out;
-    }
+   /* --- AUTH SCREEN STYLES (განახლებული) --- */
+.auth-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* თეთრი ფონი */
+    background: var(--white, #ffffff); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.auth-box {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* შედარებით ღია ჩრდილი თეთრ ფონზე */
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    border: 1px solid var(--border-light); /* ჩარჩო რომ გამოჩნდეს თეთრ ფონზე */
+}
+
+/* ლოგოს სტილი */
+.auth-logo {
+    width: 100%;
+    max-width: 300px; /* ლოგოს მაქსიმალური სიგანე */
+    margin: 0 auto 30px auto; /* ცენტრში განთავსება და ქვემოთ სივრცე */
+}
+
+.auth-logo img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* მობილურ ადაპტაცია */
+@media (max-width: 768px) {
+    /* ... არსებული კოდი ... */
 
     .auth-box {
-        background: var(--white);
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        max-width: 400px;
-        width: 90%;
-        text-align: center;
+        padding: 30px 20px; 
+        width: 95%; 
     }
-
-    .auth-box h2 {
-        color: var(--dark-blue);
-        margin-top: 0;
+    
+    .auth-logo {
+        max-width: 250px; /* ლოგოს ცოტა შემცირება მობილურზე */
         margin-bottom: 20px;
-        font-size: 24px;
-        font-weight: 700;
-    }
-
-    .auth-box button {
-        width: 100%;
-        margin-top: 20px;
     }
 
     #auth-error-message {
