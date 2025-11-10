@@ -1,3 +1,4 @@
+<!doctype html>
 <html lang="ka">
  <head>
   <meta charset="UTF-8">
@@ -423,7 +424,7 @@
             </div>
             
             <h2 style="margin-top: 0;">ავტორიზაცია</h2>
-            <p style="color: var(--dark-blue); font-size: 15px; margin-bottom: 25px;">შეიყვანეთ პაროლი</p>
+            <p style="color: var(--dark-blue); font-size: 15px; margin-bottom: 25px;">დირექტორიის სანახავად შეიყვანეთ პაროლი</p>
             <input type="password" id="auth-password-input" placeholder="პაროლი" aria-label="Enter password">
             <div id="auth-error-message"></div>
             <button id="auth-login-btn">შესვლა</button>
@@ -433,7 +434,7 @@
     <div id="main-content" style="display: none;">
         <div class="container">
             <header>
-                <h1 id="clinic-title">თბილისის სახელმწიფო სამედიცინო უნივერსტიტეტისა და ინგოროყვას მაღალი სამედიცინო ტექნოლოგიების საუნივერსიტეტო კლინიკა</h1>
+                <h1 id="clinic-title">სამედიცინო დირექტორია</h1>
                 <p class="subtitle" id="clinic-subtitle">ექიმების სატელეფონო სია</p>
             </header>
             <div class="controls">
@@ -464,7 +465,7 @@
     </div>
   <script>
     // --- AUTHENTICATION CONFIGURATION ---
-    const CORRECT_PASSWORD = "htmc2025"; // <-- შეცვალეთ ეს პაროლით, რომელიც გსურთ!
+    const CORRECT_PASSWORD = "med123"; // <-- შეცვალეთ ეს პაროლით, რომელიც გსურთ!
     
     // --- ORIGINAL CONFIG & DATA ---
     const defaultConfig = {
@@ -495,7 +496,6 @@
       { name: 'მარიამი', specialty: 'რენტგენი', phone: '598 100 644' },
       { name: 'მანანა გოგოლაძე', specialty: 'ექოსკოპია', phone: '577 450 049' },
       { name: 'ანა ინგოროყვა', specialty: 'ექოსკოპია', phone: '599 222 201' },
-      { name: 'თამარ გოგელია', specialty: 'ექოსკოპია', phone: '557 424 363' },
       { name: 'მარიამ გავაშელი', specialty: 'ექოსკოპია', phone: '544 447 346' },
       { name: 'ბელა ანთიძე', specialty: 'ექოსკოპია', phone: '595 245 500' },
       { name: 'ირინა მოდებაძე', specialty: 'ექოსკოპია', phone: '577 090 967' },
