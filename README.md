@@ -474,10 +474,10 @@
       refresh_button_text: 'განახლება',
       print_button_text: 'ბეჭდვა',
       search_placeholder: 'ძებნა სახელით ან გვარით...',
-      primary_color: '#0077b6', // Primary Blue
-      background_color: '#f8f9fa', // Light Background
-      text_color: '#023e8a', // Dark Blue
-      secondary_text_color: '#00b4d8', // Light Blue/Accent
+      primary_color: '#0077b6', 
+      background_color: '#f8f9fa', 
+      text_color: '#023e8a', 
+      secondary_text_color: '#00b4d8', 
       border_color: '#0077b6',
       font_family: 'Inter',
       font_size: 16
@@ -616,34 +616,39 @@
       { name: 'თინათინ ნაფეტვარიძე', specialty: 'კარდიოლოგია', phone: '598 358 522' }
     ];
 
-    // --- AUTHENTICATION LOGIC ---
-    function handleLogin() {
+    // --- AUTHENTICATION LOGIC (გამოსწორებული) ---
+    function handleLogin(event) {
+        // ეს ხაზი უზრუნველყოფს, რომ ბრაუზერი არ შეეცადოს გვერდის გადატვირთვას
+        if (event && event.preventDefault) {
+             event.preventDefault(); 
+        }
+        
         const passwordInput = document.getElementById('auth-password-input');
         const errorMessage = document.getElementById('auth-error-message');
+        const authOverlay = document.getElementById('auth-overlay');
+        const mainContent = document.getElementById('main-content');
         
         if (passwordInput.value === CORRECT_PASSWORD) {
-            document.getElementById('auth-overlay').style.opacity = '0';
+            errorMessage.textContent = '';
+            
+            // ანიმაცია: ავტორიზაციის ეკრანის დამალვა
+            authOverlay.style.opacity = '0';
+            
             setTimeout(() => {
-                document.getElementById('auth-overlay').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                fetchDoctors(); // Load data only after successful login
-            }, 300);
+                authOverlay.style.display = 'none';
+                mainContent.style.display = 'block';
+                fetchDoctors(); // მონაცემების ჩატვირთვა
+            }, 300); 
+            
         } else {
+            // თუ პაროლი არასწორია
             errorMessage.textContent = 'არასწორი პაროლი! სცადეთ ხელახლა.';
-            passwordInput.value = ''; // Clear input on failure
+            passwordInput.value = ''; 
             passwordInput.focus();
         }
     }
 
-    // Attach event listeners for login
-    document.getElementById('auth-login-btn').addEventListener('click', handleLogin);
-    document.getElementById('auth-password-input').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            handleLogin();
-        }
-    });
-
-    // --- DIRECTORY FUNCTIONS (Unchanged from previous version, just moved) ---
+    // --- DIRECTORY FUNCTIONS (უცვლელი) ---
 
     async function onConfigChange(newConfig) {
       config = { ...config, ...newConfig };
@@ -767,7 +772,6 @@
         renderDoctors();
       } finally {
         loadingEl.style.display = 'none';
-        // Note: listEl display is set in renderDoctors based on results
         refreshBtn.disabled = false;
       }
     }
@@ -865,25 +869,46 @@
       });
     }
 
-    // Event Listeners for Directory (Only activate after successful login)
-    document.getElementById('search-input').addEventListener('input', renderDoctors);
-    document.getElementById('specialty-filter').addEventListener('change', renderDoctors);
-    
-    document.getElementById('refresh-btn').addEventListener('click', fetchDoctors);
-    
-    document.getElementById('sort-name').addEventListener('click', () => {
-      currentSort = 'name';
-      document.getElementById('sort-name').classList.add('active');
-      document.getElementById('sort-specialty').classList.remove('active');
-      renderDoctors();
+    // --- EVENT LISTENERS (სწორი მიბმა) ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const loginBtn = document.getElementById('auth-login-btn');
+        const passwordInput = document.getElementById('auth-password-input');
+        
+        if (loginBtn) {
+            loginBtn.addEventListener('click', handleLogin);
+        }
+        
+        if (passwordInput) {
+             passwordInput.focus(); 
+             
+             // Enter ღილაკზე დაჭერის ლოგიკა
+             passwordInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    handleLogin(e); 
+                }
+            });
+        }
+        
+        // --- DIRECTORY LISTENERS ---
+        document.getElementById('search-input').addEventListener('input', renderDoctors);
+        document.getElementById('specialty-filter').addEventListener('change', renderDoctors);
+        document.getElementById('refresh-btn').addEventListener('click', fetchDoctors);
+        
+        document.getElementById('sort-name').addEventListener('click', () => {
+            currentSort = 'name';
+            document.getElementById('sort-name').classList.add('active');
+            document.getElementById('sort-specialty').classList.remove('active');
+            renderDoctors();
+        });
+        
+        document.getElementById('sort-specialty').addEventListener('click', () => {
+            currentSort = 'specialty';
+            document.getElementById('sort-specialty').classList.add('active');
+            document.getElementById('sort-name').classList.remove('active');
+            renderDoctors();
+        });
     });
-    
-    document.getElementById('sort-specialty').addEventListener('click', () => {
-      currentSort = 'specialty';
-      document.getElementById('sort-specialty').classList.add('active');
-      document.getElementById('sort-name').classList.remove('active');
-      renderDoctors();
-    });
+
 
     // SDK Init
     if (window.elementSdk) {
@@ -894,13 +919,6 @@
         mapToEditPanelValues
       });
     }
-    
-    // Initial Focus on Password Input (after document is ready)
-    document.addEventListener('DOMContentLoaded', () => {
-        document.getElementById('auth-password-input').focus();
-    });
-    
-    // NOTE: fetchDoctors is called ONLY after successful login (in handleLogin function)
   </script>
  </body>
 </html>
