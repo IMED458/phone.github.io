@@ -464,7 +464,7 @@
     </div>
   <script>
     // --- AUTHENTICATION CONFIGURATION ---
-    const CORRECT_PASSWORD = "med123"; // <-- შეცვალეთ ეს პაროლით, რომელიც გსურთ!
+    const CORRECT_PASSWORD = "htmc2025"; // <-- შეცვალეთ ეს პაროლით, რომელიც გსურთ!
     
     // --- ORIGINAL CONFIG & DATA ---
     const defaultConfig = {
