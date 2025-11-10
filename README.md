@@ -92,7 +92,7 @@
       box-shadow: 0 8px 25px rgba(0,119,182,0.15); transform: translateY(-3px); border-color: var(--primary-blue);
     }
     .doctor-name { font-size: 20px; font-weight: 700; margin: 0 0 6px; color: var(--dark-blue); letter-spacing: -0.3px; }
-    .doctor-specialty { font Grac: 15px; color: var(--light-blue); margin: 0 0 16px; font-weight: 600; }
+    .doctor-specialty { font-size: 15px; color: var(--light-blue); margin: 0 0 16px; font-weight: 600; }
     .doctor-phone { font-size: 16px; font-weight: 500; }
     .doctor-phone a {
       color: var(--primary-blue); text-decoration: none; border-bottom: 1px dashed var(--primary-blue);
@@ -103,14 +103,13 @@
     /* AUTH SCREEN */
     .auth-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--white);
-        display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 1000;
+        display: flex; justify-content: center; align-items: center; z-index: 1000;
         transition: opacity 0.4s ease; opacity: 1;
     }
     .auth-box {
         background: var(--white); padding: 40px; border-radius: 12px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 400px; width: 90%;
         text-align: center; border: 1px solid var(--border-light);
-        flex: 1; display: flex; flex-direction: column; justify-content: center;
     }
     .auth-box h2 { color: var(--dark-blue); margin: 0 0 20px; font-size: 24px; font-weight: 700; }
     .auth-box button { width: 100%; margin-top: 20px; }
@@ -118,8 +117,8 @@
     .auth-logo { width: 100%; max-width: 300px; margin: 0 auto 30px; }
     .auth-logo img { width: 100%; height: auto; display: block; }
 
-    /* FOOTER — მთავარ გვერდზე */
-    .footer-main {
+    /* FOOTER */
+    .footer {
       margin-top: auto;
       text-align: center;
       padding: 20px 0;
@@ -129,22 +128,13 @@
       border-top: 1px solid var(--border-light);
       font-weight: 500;
     }
-
-    /* FOOTER — ავტორიზაციის გვერდზე */
-    .footer-auth {
-      text-align: center;
-      padding: 15px 0;
-      font-size: 13px;
-      color: #888;
-      background: transparent;
-      font-weight: 500;
-      width: 100%;
+    .footer p {
+      margin: 0;
     }
-    .footer-auth p { margin: 0; }
 
     /* Print */
     @media print {
-      .auth-overlay, .controls, .action-buttons, .sort-controls, button, .footer-main, .footer-auth { display: none !important; }
+      .auth-overlay, .controls, .action-buttons, .sort-controls, button, .footer { display: none !important; }
       .container { max-width: 100%; padding: 0; }
       .doctor-card { break-inside: avoid; box-shadow: none !important; border: 1px solid #ccc !important; margin-bottom: 15px; }
       body { background: #ffffff; }
@@ -163,7 +153,6 @@
       .doctors-list { grid-template-columns: 1fr; }
       .auth-box { padding: 30px 20px; width: 95%; }
       .auth-logo { max-width: 250px; margin-bottom: 20px; }
-      .footer-auth { font-size: 12px; padding: 10px 0; }
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
@@ -184,10 +173,6 @@
       <div id="auth-error-message"></div>
       <button id="auth-login-btn">შესვლა</button>
     </div>
-    <!-- ფუთერი ავტორიზაციის გვერდზე -->
-    <footer class="footer-auth">
-      <p>made by IMED</p>
-    </footer>
   </div>
 
   <!-- MAIN CONTENT -->
@@ -219,11 +204,12 @@
       <div id="doctors-list" class="doctors-list"></div>
       <div id="no-results" class="no-results" style="display: none;">შედეგები არ მოიძებნა</div>
     </div>
-    <!-- ფუთერი მთავარ გვერდზე -->
-    <footer class="footer-main">
-      <p>made by IMED</p>
-    </footer>
   </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>made by IMED🩺</p>
+  </footer>
 
   <script>
     // === 1. პაროლი ===
@@ -231,7 +217,7 @@
 
     // === 2. კონფიგურაცია ===
     const defaultConfig = {
-      clinic_title: 'თბილისის სახელმწიფო სამედიცინო უნივერსიტეტისა და ინგოროყვას მაღალი სამედიცინო ტექნოლოგიების საუნივერსიტეტო კლინიკა',
+      clinic_title: 'თბილისის სახელმწიფო სამედიცინო უნივერსტიტეტისა და ინგოროყვას მაღალი სამედიცინო ტექნოლოგიების საუნივერსიტეტო კლინიკა',
       clinic_subtitle: 'ექიმების სატელეფონო სია',
       refresh_button_text: 'განახლება',
       print_button_text: 'ბეჭდვა',
@@ -304,7 +290,7 @@
       { name: 'დავით გობეჯიშვილი', specialty: 'ენდოსკოპია', phone: '599 933 584' },
       { name: 'თეიმურაზ სამადაშვილი', specialty: 'ენდოსკოპია', phone: '598 22 22 46' },
       { name: 'ირაკლი შეკლაშვილი', specialty: 'ენდოსკოპია', phone: '577 339 956' },
-      { name: 'მარიკა წერეთელი', specialty: 'ინფექციური სნეულებები', phone:: '593 362 987' },
+      { name: 'მარიკა წერეთელი', specialty: 'ინფექციური სნეულებები', phone: '593 362 987' },
       { name: 'ნუცა დონაძე', specialty: 'ინფექციური სნეულებები', phone: '599 89 08 29' },
       { name: 'თაკო ზაზაძე', specialty: 'ინფექციური სნეულებები', phone: '597 777 113' },
       { name: 'თამარ წერეთელი', specialty: 'ინფექციური სნეულებები', phone: '555 558 333' },
