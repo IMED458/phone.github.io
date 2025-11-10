@@ -16,6 +16,7 @@
         --secondary-text-color: var(--light-blue);
         --border-color: var(--primary-blue);
         --error-red: #dc3545; /* წითელი შეცდომისთვის */
+        --white: #ffffff; /* თეთრი ფერი */
     }
 
     body {
@@ -264,58 +265,43 @@
       font-weight: 500;
     }
 
-   /* --- AUTH SCREEN STYLES (განახლებული) --- */
-.auth-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* თეთრი ფონი */
-    background: var(--white, #ffffff); 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    transition: opacity 0.3s ease-in-out;
-}
-
-.auth-box {
-    background: var(--white);
-    padding: 40px;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* შედარებით ღია ჩრდილი თეთრ ფონზე */
-    max-width: 400px;
-    width: 90%;
-    text-align: center;
-    border: 1px solid var(--border-light); /* ჩარჩო რომ გამოჩნდეს თეთრ ფონზე */
-}
-
-/* ლოგოს სტილი */
-.auth-logo {
-    width: 100%;
-    max-width: 300px; /* ლოგოს მაქსიმალური სიგანე */
-    margin: 0 auto 30px auto; /* ცენტრში განთავსება და ქვემოთ სივრცე */
-}
-
-.auth-logo img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* მობილურ ადაპტაცია */
-@media (max-width: 768px) {
-    /* ... არსებული კოდი ... */
+    /* --- AUTH SCREEN STYLES (განახლებული) --- */
+    .auth-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--white, #ffffff); /* თეთრი ფონი */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        transition: opacity 0.3s ease-in-out;
+    }
 
     .auth-box {
-        padding: 30px 20px; 
-        width: 95%; 
+        background: var(--white);
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* ღია ჩრდილი თეთრ ფონზე */
+        max-width: 400px;
+        width: 90%;
+        text-align: center;
+        border: 1px solid var(--border-light); /* თეთრ ფონზე უკეთ გამოჩენისთვის */
     }
-    
-    .auth-logo {
-        max-width: 250px; /* ლოგოს ცოტა შემცირება მობილურზე */
+
+    .auth-box h2 {
+        color: var(--dark-blue);
+        margin-top: 0;
         margin-bottom: 20px;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    .auth-box button {
+        width: 100%;
+        margin-top: 20px;
     }
 
     #auth-error-message {
@@ -324,6 +310,19 @@
         font-size: 14px;
         font-weight: 600;
         min-height: 20px;
+    }
+    
+    /* ლოგოს სტილი */
+    .auth-logo {
+        width: 100%;
+        max-width: 300px; /* ლოგოს მაქსიმალური სიგანე */
+        margin: 0 auto 30px auto; /* ცენტრში განთავსება და ქვემოთ სივრცე */
+    }
+
+    .auth-logo img {
+        width: 100%;
+        height: auto;
+        display: block;
     }
 
     /* Print Styles */
@@ -399,6 +398,17 @@
       .doctors-list {
           grid-template-columns: 1fr;
       }
+      
+      /* AUTH mobile adjustments */
+      .auth-box {
+        padding: 30px 20px; 
+        width: 95%; 
+      }
+      
+      .auth-logo {
+        max-width: 250px; 
+        margin-bottom: 20px;
+      }
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
@@ -408,8 +418,12 @@
  <body>
     <div id="auth-overlay" class="auth-overlay">
         <div class="auth-box">
-            <h2>ავტორიზაცია</h2>
-            <p style="color: var(--white); font-size: 15px; margin-bottom: 25px;">დირექტორიის სანახავად შეიყვანეთ პაროლი</p>
+            <div class="auth-logo">
+                <img src="./tm_center_logo.png" alt="TM Center კლინიკის ლოგო">
+            </div>
+            
+            <h2 style="margin-top: 0;">ავტორიზაცია</h2>
+            <p style="color: var(--dark-blue); font-size: 15px; margin-bottom: 25px;">შეიყვანეთ პაროლი</p>
             <input type="password" id="auth-password-input" placeholder="პაროლი" aria-label="Enter password">
             <div id="auth-error-message"></div>
             <button id="auth-login-btn">შესვლა</button>
@@ -450,7 +464,7 @@
     </div>
   <script>
     // --- AUTHENTICATION CONFIGURATION ---
-    const CORRECT_PASSWORD = "Htmc2025"; // <-- შეცვალეთ ეს პაროლით, რომელიც გსურთ!
+    const CORRECT_PASSWORD = "med123"; // <-- შეცვალეთ ეს პაროლით, რომელიც გსურთ!
     
     // --- ORIGINAL CONFIG & DATA ---
     const defaultConfig = {
@@ -481,8 +495,8 @@
       { name: 'მარიამი', specialty: 'რენტგენი', phone: '598 100 644' },
       { name: 'მანანა გოგოლაძე', specialty: 'ექოსკოპია', phone: '577 450 049' },
       { name: 'ანა ინგოროყვა', specialty: 'ექოსკოპია', phone: '599 222 201' },
-      { name: 'მარიამ გავაშელი', specialty: 'ექოსკოპია', phone: '544 447 346' },
       { name: 'თამარ გოგელია', specialty: 'ექოსკოპია', phone: '557 424 363' },
+      { name: 'მარიამ გავაშელი', specialty: 'ექოსკოპია', phone: '544 447 346' },
       { name: 'ბელა ანთიძე', specialty: 'ექოსკოპია', phone: '595 245 500' },
       { name: 'ირინა მოდებაძე', specialty: 'ექოსკოპია', phone: '577 090 967' },
       { name: 'ლაბორატორია', specialty: 'ლაბორატორია', phone: '577 101 949' },
@@ -636,7 +650,7 @@
       
       const baseSize = config.font_size || defaultConfig.font_size;
       const customFont = config.font_family || defaultConfig.font_family;
-      const baseFontStack = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+      const baseFontStack = '-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif';
       
       document.documentElement.style.setProperty('--primary-blue', config.primary_color || defaultConfig.primary_color);
       document.documentElement.style.setProperty('--dark-blue', config.text_color || defaultConfig.text_color);
@@ -881,8 +895,10 @@
       });
     }
     
-    // Initial Focus on Password Input
-    document.getElementById('auth-password-input').focus();
+    // Initial Focus on Password Input (after document is ready)
+    document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('auth-password-input').focus();
+    });
     
     // NOTE: fetchDoctors is called ONLY after successful login (in handleLogin function)
   </script>
