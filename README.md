@@ -1,4 +1,3 @@
-<!doctype html>
 <html lang="ka">
  <head>
   <meta charset="UTF-8">
@@ -351,7 +350,7 @@
  <body>
   <div class="container">
    <header>
-    <h1 id="clinic-title">სამედიცინო დირექტორია</h1>
+    <h1 id="clinic-title">თბილისის სახელმწიფო სამედიცინო უნივერსტიტეტისა და ინგოროყვას მაღალი სამედიცინო ტექნოლოგიების საუნივერსიტეტო კლინიკა</h1>
     <p class="subtitle" id="clinic-subtitle">ექიმების სატელეფონო სია</p>
    </header>
    <div class="controls">
