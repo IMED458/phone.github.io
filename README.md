@@ -1,11 +1,10 @@
 <html lang="ka">
- <head>
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Medical Directory</title>
   <script src="/_sdk/element_sdk.js"></script>
   <style>
-    /* ფერთა პალიტრა */
     :root {
         --primary-blue: #0077b6;
         --dark-blue: #023e8a;
@@ -36,21 +35,19 @@
     h1 { font-size: 36px; font-weight: 800; margin: 0 0 4px; letter-spacing: -0.8px; color: var(--dark-blue); }
     .subtitle { font-size: 18px; color: var(--light-blue); margin: 0; font-weight: 500; }
 
-    /* Controls */
     .controls { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px; align-items: center; }
     .search-box, .filter-box { flex: 1; min-width: 250px; }
-    .search-box input, .filter-box select, #auth-password-input {
+    .search-box input, .filter-box select {
       width: 100%; padding: 12px 16px; border: 1px solid #ced4da; border-radius: 8px; font-size: 16px;
       font-family: inherit; background: var(--white); color: var(--text-color);
       transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .search-box input:focus, .filter-box select:focus, #auth-password-input:focus {
+    .search-box input:focus, .filter-box select:focus {
       outline: none; border-color: var(--primary-blue); box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
     }
     .filter-box select { cursor: pointer; }
     .action-buttons { display: flex; gap: 10px; }
 
-    /* Buttons */
     button {
       padding: 12px 20px; border: 2px solid var(--primary-blue); background: var(--primary-blue);
       color: var(--white); font-size: 16px; font-weight: 600; border-radius: 8px; cursor: pointer;
@@ -61,7 +58,6 @@
     #print-btn:hover { background: var(--border-light); color: var(--dark-blue); border-color: var(--dark-blue); }
     button:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
 
-    /* Sort */
     .sort-controls { display: flex; gap: 10px; margin-bottom: 24px; }
     .sort-btn {
       padding: 8px 16px; font-size: 14px; border: 1px solid var(--border-light);
@@ -71,7 +67,6 @@
     .sort-btn.active { background: var(--primary-blue); color: var(--white); border-color: var(--primary-blue); }
     .sort-btn.active:hover { background: var(--dark-blue); }
 
-    /* Loading & No Results */
     .loading { text-align: center; padding: 40px; font-size: 18px; color: var(--primary-blue); font-weight: 500; }
     .spinner {
       display: inline-block; width: 24px; height: 24px; border: 3px solid rgba(0,119,182,0.2);
@@ -82,7 +77,6 @@
     .doctors-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
     .no-results { text-align: center; padding: 60px; font-size: 18px; color: var(--light-blue); font-weight: 500; }
 
-    /* Doctor Card */
     .doctor-card {
       border: 1px solid var(--border-light); padding: 24px; border-radius: 12px; background: var(--white);
       box-shadow: 0 4px 12px rgba(0,0,0,0.05); transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1);
@@ -99,24 +93,6 @@
     }
     .doctor-phone a:hover { color: var(--dark-blue); border-bottom: 2px solid var(--dark-blue); }
 
-    /* AUTH SCREEN */
-    .auth-overlay {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--white);
-        display: flex; justify-content: center; align-items: center; z-index: 1000;
-        transition: opacity 0.4s ease; opacity: 1;
-    }
-    .auth-box {
-        background: var(--white); padding: 40px; border-radius: 12px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1); max-width: 400px; width: 90%;
-        text-align: center; border: 1px solid var(--border-light);
-    }
-    .auth-box h2 { color: var(--dark-blue); margin: 0 0 20px; font-size: 24px; font-weight: 700; }
-    .auth-box button { width: 100%; margin-top: 20px; }
-    #auth-error-message { color: var(--error-red); margin-top: 10px; font-size: 14px; font-weight: 600; min-height: 20px; }
-    .auth-logo { width: 100%; max-width: 300px; margin: 0 auto 30px; }
-    .auth-logo img { width: 100%; height: auto; display: block; }
-
-    /* FOOTER */
     .footer {
       margin-top: auto;
       text-align: center;
@@ -127,19 +103,15 @@
       border-top: 1px solid var(--border-light);
       font-weight: 500;
     }
-    .footer p {
-      margin: 0;
-    }
+    .footer p { margin: 0; }
 
-    /* Print */
     @media print {
-      .auth-overlay, .controls, .action-buttons, .sort-controls, button, .footer { display: none !important; }
+      .controls, .action-buttons, .sort-controls, button, .footer { display: none !important; }
       .container { max-width: 100%; padding: 0; }
       .doctor-card { break-inside: avoid; box-shadow: none !important; border: 1px solid #ccc !important; margin-bottom: 15px; }
       body { background: #ffffff; }
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
       .container { padding: 20px 16px; }
       h1 { font-size: 28px; }
@@ -150,32 +122,16 @@
       .action-buttons button { flex: 1; }
       .sort-controls { flex-wrap: wrap; gap: 8px; justify-content: center; }
       .doctors-list { grid-template-columns: 1fr; }
-      .auth-box { padding: 30px 20px; width: 95%; }
-      .auth-logo { max-width: 250px; margin-bottom: 20px; }
     }
   </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
- </head>
- <body>
+</head>
+<body>
 
-  <!-- AUTH SCREEN -->
-  <div id="auth-overlay" class="auth-overlay">
-    <div class="auth-box">
-      <div class="auth-logo">
-        <img src="./tm_center_logo.png" alt="TM Center კლინიკის ლოგო">
-      </div>
-      <h2>ავტორიზაცია</h2>
-      <p style="color: var(--dark-blue); font-size: 15px; margin-bottom: 25px;">შეიყვანეთ პაროლი</p>
-      <input type="password" id="auth-password-input" placeholder="პაროლი" aria-label="Enter password">
-      <div id="auth-error-message"></div>
-      <button id="auth-login-btn">შესვლა</button>
-    </div>
-  </div>
-
-  <!-- MAIN CONTENT -->
-  <div id="main-content" style="display: none;">
+  <!-- MAIN CONTENT - პირდაპირ ჩანს -->
+  <div id="main-content">
     <div class="container">
       <header>
         <h1 id="clinic-title">თბილისის სახელმწიფო სამედიცინო უნივერსიტეტისა და ინგოროყვას მაღალი სამედიცინო ტექნოლოგიების საუნივერსიტეტო კლინიკა</h1>
@@ -205,18 +161,13 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
   <footer class="footer">
-    <p>made by IMED🩺</p>
+    <p>made by IMED</p>
   </footer>
 
   <script>
-    // === 1. პაროლი ===
-    const CORRECT_PASSWORD = "med123"; // შეცვალე შენი პაროლით
-
-    // === 2. კონფიგურაცია ===
     const defaultConfig = {
-      clinic_title: 'თბილისის სახელმწიფო სამედიცინო უნივერსტიტეტისა და ინგოროყვას მაღალი სამედიცინო ტექნოლოგიების საუნივერსიტეტო კლინიკა',
+      clinic_title: 'თბილისის სახელმწიფო სამედიცინო უნივერსიტეტისა და ინგოროყვას მაღალი სამედიცინო ტექნოლოგიების საუნივერსიტეტო კლინიკა',
       clinic_subtitle: 'ექიმების სატელეფონო სია',
       refresh_button_text: 'განახლება',
       print_button_text: 'ბეჭდვა',
@@ -233,7 +184,6 @@
     let allDoctors = [];
     let currentSort = 'name';
 
-    // === 3. ექიმების მონაცემები ===
     const sampleDoctors = [
       { name: 'პაატა ბარათაშვილი', specialty: 'რადიოლოგი', phone: '593 311 748' },
       { name: 'ვაჟა თავბერიძე', specialty: 'რადიოლოგი', phone: '551 470 471' },
@@ -241,13 +191,13 @@
       { name: 'ნინო', specialty: 'რენტგენი', phone: '599 400 311' },
       { name: 'ნაზი', specialty: 'რენტგენი', phone: '555 181 801' },
       { name: 'მარიამი', specialty: 'რენტგენი', phone: '598 100 644' },
-     { name: 'ნიკა მაჩაიძე', specialty: 'CT ოპერატორი', phone: '‭598 295 798‬' },
-     { name: 'მარიამი', specialty: 'CT ოპერატორი', phone: '‭599 216 624‬' },
-     { name: 'ზურა ქოჩერაშვილი', specialty: 'CT ოპერატორი', phone: '‭557 767 362‬' },
-     { name: 'მაია დემურიშვილი', specialty: 'CT რადიოლოგი', phone: '‭555 258 800‬' },
-      { name: 'ვალერიანე უხურგუნაშვილი', specialty: 'CT რადიოლოგი', phone: '‭‭558 333 455‬‬' },
-     { name: 'ცისია კახაძე', specialty: 'CT რადიოლოგი', phone: '‭‭599 407 560‬' },
-      { name: 'ჯუბა ნაზარაშვილი', specialty: 'CT ოპერატორი', phone: '‭571 036 317‬' },
+      { name: 'ნიკა მაჩაიძე', specialty: 'CT ოპერატორი', phone: '598 295 798' },
+      { name: 'მარიამი', specialty: 'CT ოპერატორი', phone: '599 216 624' },
+      { name: 'ზურა ქოჩერაშვილი', specialty: 'CT ოპერატორი', phone: '557 767 362' },
+      { name: 'მაია დემურიშვილი', specialty: 'CT რადიოლოგი', phone: '555 258 800' },
+      { name: 'ვალერიანე უხურგუნაშვილი', specialty: 'CT რადიოლოგი', phone: '558 333 455' },
+      { name: 'ცისია კახაძე', specialty: 'CT რადიოლოგი', phone: '599 407 560' },
+      { name: 'ჯუბა ნაზარაშვილი', specialty: 'CT ოპერატორი', phone: '571 036 317' },
       { name: 'მანანა გოგოლაძე', specialty: 'ექოსკოპია', phone: '577 450 049' },
       { name: 'ანა ინგოროყვა', specialty: 'ექოსკოპია', phone: '599 222 201' },
       { name: 'მარიამ გავაშელი', specialty: 'ექოსკოპია', phone: '544 447 346' },
@@ -266,11 +216,11 @@
       { name: 'მარიკა ყურაშვილი', specialty: 'უროლოგია', phone: '555 213 650' },
       { name: 'ზაური თაქთაქიშილი', specialty: 'უროლოგია', phone: '551 591 774' },
       { name: 'გიგი ორაგველიძე', specialty: 'უროლოგია', phone: '511 282 879' },
-     { name: 'გიორგი ხიზანიშვილი', specialty: 'ტრავმატოლოგია', phone: '‭595 914 096‬' },
-      { name: 'კახა გოშაძე', specialty: 'ტრავმატოლოგია', phone: '598 787 859‬‬' },
-     { name: 'ზურა ჩხარტიშვილი', specialty: 'ტრავმატოლოგია', phone: '599 055 181‬' },
-     { name: 'ნიკა ლომიძე', specialty: 'ტრავმატოლოგია', phone: '‭599 808 191‬' },
-     { name: 'ნიკა რაზმაძე', specialty: 'ტრავმატოლოგია', phone: '‭‭579 775 674‬' },
+      { name: 'გიორგი ხიზანიშვილი', specialty: 'ტრავმატოლოგია', phone: '595 914 096' },
+      { name: 'კახა გოშაძე', specialty: 'ტრავმატოლოგია', phone: '598 787 859' },
+      { name: 'ზურა ჩხარტიშვილი', specialty: 'ტრავმატოლოგია', phone: '599 055 181' },
+      { name: 'ნიკა ლომიძე', specialty: 'ტრავმატოლოგია', phone: '599 808 191' },
+      { name: 'ნიკა რაზმაძე', specialty: 'ტრავმატოლოგია', phone: '579 775 674' },
       { name: 'გურამ ჩაჩუა', specialty: 'ნეირო ქირურგია', phone: '579 031 178' },
       { name: 'მიხეილ გურასპიშვილი', specialty: 'ნეირო ქირურგია', phone: '555 191 378' },
       { name: 'ოთარ გახოკია', specialty: 'ნეირო ქირურგია', phone: '558 344 233' },
@@ -310,7 +260,7 @@
       { name: 'ირმა მარკოიძე', specialty: 'ინფექციური სნეულებები', phone: '599 470 228' },
       { name: 'ციცი მაღლაფერიძე', specialty: 'ინფექციური სნეულებები', phone: '579 70 60 81' },
       { name: 'ნინო წურწუმია', specialty: 'ინფექციური სნეულებები', phone: '557 58 78 34' },
-     { name: 'ნინო აბულაძე', specialty: 'ინფექციური სნეულებები', phone: '599 060 194' },
+      { name: 'ნინო აბულაძე', specialty: 'ინფექციური სნეულებები', phone: '599 060 194' },
       { name: 'თამარი ტურიაშვილი', specialty: 'ინფექციური სნეულებები', phone: '598 005 186' },
       { name: 'ირინა კილაძე', specialty: 'ინფექციური სნეულებები', phone: '599 88 35 77' },
       { name: 'ეკატერინე მარკოზია', specialty: 'ინფექციური სნეულებები', phone: '555 739 633' },
@@ -354,7 +304,7 @@
       { name: 'სალომე დარასელია', specialty: 'ნეფროლოგია', phone: '574 54 37 37' },
       { name: 'გიორგი გაზდელიანი', specialty: 'ნეფროლოგია', phone: '591 000 604' },
       { name: 'ანა ჭიქაბერიძე', specialty: 'ნეფროლოგია', phone: '599 103 106' },
-     { name: 'ხაიალ დემურჩიევ', specialty: 'ნეფროლოგია', phone: '577 591 644' },
+      { name: 'ხაიალ დემურჩიევ', specialty: 'ნეფროლოგია', phone: '577 591 644' },
       { name: 'ნინო ბუაძე', specialty: 'ნეფროლოგია', phone: '593 494 995' },
       { name: 'თეონა ხელაშვილი', specialty: 'ნეფროლოგია', phone: '557 438 626' },
       { name: 'გვანცა მეცხვარიშვილი', specialty: 'ნეფროლოგია', phone: '597 777 991' },
@@ -378,30 +328,6 @@
       { name: 'თინათინ ნაფეტვარიძე', specialty: 'კარდიოლოგია', phone: '598 358 522' }
     ];
 
-    // === 4. ავტორიზაცია ===
-    function handleLogin(e) {
-        if (e) e.preventDefault();
-        const input = document.getElementById('auth-password-input');
-        const error = document.getElementById('auth-error-message');
-        const overlay = document.getElementById('auth-overlay');
-        const main = document.getElementById('main-content');
-        const pass = input.value.trim();
-        if (pass === CORRECT_PASSWORD) {
-            error.textContent = '';
-            overlay.style.opacity = '0';
-            setTimeout(() => {
-                overlay.style.display = 'none';
-                main.style.display = 'block';
-                initDirectory();
-            }, 400);
-        } else {
-            error.textContent = 'არასწორი პაროლი!';
-            input.value = '';
-            input.focus();
-        }
-    }
-
-    // === 5. ინიციალიზაცია ===
     function initDirectory() {
         setupEventListeners();
         fetchDoctors();
@@ -414,12 +340,8 @@
         document.getElementById('search-input').addEventListener('input', renderDoctors);
         document.getElementById('specialty-filter').addEventListener('change', renderDoctors);
         document.getElementById('refresh-btn').addEventListener('click', fetchDoctors);
-        document.getElementById('sort-name').addEventListener('click', () => {
-            currentSort = 'name'; toggleSortActive('sort-name'); renderDoctors();
-        });
-        document.getElementById('sort-specialty').addEventListener('click', () => {
-            currentSort = 'specialty'; toggleSortActive('sort-specialty'); renderDoctors();
-        });
+        document.getElementById('sort-name').addEventListener('click', () => { currentSort = 'name'; toggleSortActive('sort-name'); renderDoctors(); });
+        document.getElementById('sort-specialty').addEventListener('click', () => { currentSort = 'specialty'; toggleSortActive('sort-specialty'); renderDoctors(); });
     }
 
     function toggleSortActive(id) {
@@ -427,42 +349,43 @@
         document.getElementById(id).classList.add('active');
     }
 
-    // === 6. მონაცემები ===
     async function fetchDoctors() {
         const loading = document.getElementById('loading');
         const list = document.getElementById('doctors-list');
         const btn = document.getElementById('refresh-btn');
         loading.style.display = 'block'; list.style.display = 'none'; btn.disabled = true;
-        try {
-            await new Promise(r => setTimeout(r, 600));
-            allDoctors = [...sampleDoctors];
-            populateSpecialtyFilter();
-            renderDoctors();
-        } catch { allDoctors = [...sampleDoctors]; populateSpecialtyFilter(); renderDoctors(); }
-        finally { loading.style.display = 'none'; btn.disabled = false; }
+        await new Promise(r => setTimeout(r, 600));
+        allDoctors = [...sampleDoctors];
+        populateSpecialtyFilter();
+        renderDoctors();
+        loading.style.display = 'none'; btn.disabled = false;
     }
 
     function populateSpecialtyFilter() {
         const uniq = [...new Set(allDoctors.map(d => d.specialty))].sort((a,b) => a.localeCompare(b,'ka'));
         const sel = document.getElementById('specialty-filter');
-        const cur = sel.value;
         sel.innerHTML = '<option value="">ყველა სპეციალობა</option>';
         uniq.forEach(s => { const o = document.createElement('option'); o.value = s; o.textContent = s; sel.appendChild(o); });
-        if (cur && uniq.includes(cur)) sel.value = cur;
     }
 
     function renderDoctors() {
         const search = document.getElementById('search-input').value.toLowerCase();
         const spec = document.getElementById('specialty-filter').value;
         let filtered = allDoctors.filter(d => d.name.toLowerCase().includes(search) && (!spec || d.specialty === spec));
-        filtered.sort(currentSort === 'name' ? (a,b) => a.name.localeCompare(b.name,'ka') : (a,b) => a.specialty.localeCompare(b.specialty,'ka') || a.name.localeCompare(b.name,'ka'));
+        filtered.sort(currentSort === 'name' 
+            ? (a,b) => a.name.localeCompare(b.name,'ka') 
+            : (a,b) => a.specialty.localeCompare(b.specialty,'ka') || a.name.localeCompare(b.name,'ka')
+        );
+
         const list = document.getElementById('doctors-list');
         const nores = document.getElementById('no-results');
         if (filtered.length === 0) { list.style.display = 'none'; nores.style.display = 'block'; return; }
         nores.style.display = 'none'; list.style.display = 'grid'; list.innerHTML = '';
+
         const fs = config.font_size || 16;
         const ff = config.font_family || 'Inter';
         const stack = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+
         filtered.forEach(d => {
             const card = document.createElement('div'); card.className = 'doctor-card'; card.style.borderColor = config.border_color || '#0077b6';
             const name = document.createElement('div'); name.className = 'doctor-name'; name.textContent = d.name;
@@ -470,13 +393,12 @@
             const specEl = document.createElement('div'); specEl.className = 'doctor-specialty'; specEl.textContent = d.specialty;
             specEl.style.fontFamily = `${ff}, ${stack}`; specEl.style.fontSize = `${fs - 1}px`; specEl.style.color = config.secondary_text_color || '#00b4d8';
             const phone = document.createElement('div'); phone.className = 'doctor-phone'; phone.style.fontFamily = `${ff}, ${stack}`; phone.style.fontSize = `${fs}px`;
-            const link = document.createElement('a'); link.href = `tel:+995${d.phone.replace(/\s/g,'')}`; link.textContent = d.phone;
+            const link = document.createElement('a'); link.href = `tel:+995${d.phone.replace(/\s/g,'').replace(/[^0-9]/g,'')}`; link.textContent = d.phone;
             link.style.color = config.border_color || '#0077b6'; link.style.borderBottomColor = config.border_color || '#0077b6';
             phone.appendChild(link); card.append(name, specEl, phone); list.appendChild(card);
         });
     }
 
-    // === 7. SDK კონფიგურაცია ===
     async function onConfigChange(newConfig) {
         config = { ...config, ...newConfig };
         document.documentElement.style.setProperty('--primary-blue', config.primary_color || defaultConfig.primary_color);
@@ -494,41 +416,10 @@
         renderDoctors();
     }
 
-    function mapToCapabilities(cfg) {
-        return {
-            recolorables: [
-                { get: () => cfg.background_color || defaultConfig.background_color, set: v => { cfg.background_color = v; if (window.elementSdk) window.elementSdk.setConfig({ background_color: v }); } },
-                { get: () => cfg.border_color || defaultConfig.border_color, set: v => { cfg.border_color = v; if (window.elementSdk) window.elementSdk.setConfig({ border_color: v }); } },
-                { get: () => cfg.text_color || defaultConfig.text_color, set: v => { cfg.text_color = v; if (window.elementSdk) window.elementSdk.setConfig({ text_color: v }); } },
-                { get: () => cfg.secondary_text_color || defaultConfig.secondary_text_color, set: v => { cfg.secondary_text_color = v; if (window.elementSdk) window.elementSdk.setConfig({ secondary_text_color: v }); } },
-                { get: () => cfg.primary_color || defaultConfig.primary_color, set: v => { cfg.primary_color = v; if (window.elementSdk) window.elementSdk.setConfig({ primary_color: v }); } }
-            ],
-            borderables: [],
-            fontEditable: { get: () => cfg.font_family || defaultConfig.font_family, set: v => { cfg.font_family = v; if (window.elementSdk) window.elementSdk.setConfig({ font_family: v }); } },
-            fontSizeable: { get: () => cfg.font_size || defaultConfig.font_size, set: v => { cfg.font_size = v; if (window.elementSdk) window.elementSdk.setConfig({ font_size: v }); } }
-        };
-    }
+    function mapToCapabilities(cfg) { return { recolorables: [], borderables: [], fontEditable: {}, fontSizeable: {} }; }
+    function mapToEditPanelValues(cfg) { return new Map(); }
 
-    function mapToEditPanelValues(cfg) {
-        return new Map([
-            ['clinic_title', cfg.clinic_title || defaultConfig.clinic_title],
-            ['clinic_subtitle', cfg.clinic_subtitle || defaultConfig.clinic_subtitle],
-            ['refresh_button_text', cfg.refresh_button_text || defaultConfig.refresh_button_text],
-            ['print_button_text', cfg.print_button_text || defaultConfig.print_button_text],
-            ['search_placeholder', cfg.search_placeholder || defaultConfig.search_placeholder]
-        ]);
-    }
-
-    // === 8. გაშვება ===
-    document.addEventListener('DOMContentLoaded', () => {
-        const loginBtn = document.getElementById('auth-login-btn');
-        const input = document.getElementById('auth-password-input');
-        if (loginBtn) loginBtn.addEventListener('click', handleLogin);
-        if (input) {
-            input.focus();
-            input.addEventListener('keypress', e => { if (e.key === 'Enter') handleLogin(e); });
-        }
-    });
+    document.addEventListener('DOMContentLoaded', initDirectory);
   </script>
- </body>
+</body>
 </html>
