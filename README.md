@@ -20,9 +20,9 @@
         --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
         --shadow-lg: 0 8px 32px rgba(0,119,182,0.2);
     }
-
+    
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
+    
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: linear-gradient(135deg, #f5f7fa 0%, #e8f0f7 100%);
@@ -32,7 +32,7 @@
       display: flex;
       flex-direction: column;
     }
-
+    
     /* Firebase Connection Status */
     .firebase-status {
       position: fixed;
@@ -49,11 +49,22 @@
       z-index: 10;
       transition: all 0.3s ease;
     }
-
-    .firebase-status.connected { background: var(--success-green); color: white; }
-    .firebase-status.disconnected { background: var(--error-red); color: white; }
-    .firebase-status.connecting { background: #ffc107; color: #333; }
-
+    
+    .firebase-status.connected {
+      background: var(--success-green);
+      color: white;
+    }
+    
+    .firebase-status.disconnected {
+      background: var(--error-red);
+      color: white;
+    }
+    
+    .firebase-status.connecting {
+      background: #ffc107;
+      color: #333;
+    }
+    
     .status-dot {
       width: 10px;
       height: 10px;
@@ -61,43 +72,43 @@
       background: white;
       animation: pulse 2s infinite;
     }
-
+    
     @keyframes pulse {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.5; }
     }
-
-    .container {
-      max-width: 1400px;
-      margin: 0 auto;
-      padding: 40px 32px;
-      flex: 1;
+    
+    .container { 
+      max-width: 1400px; 
+      margin: 0 auto; 
+      padding: 40px 32px; 
+      flex: 1; 
     }
-
-    header {
-      text-align: center;
-      margin-bottom: 48px;
+    
+    header { 
+      text-align: center; 
+      margin-bottom: 48px; 
       background: var(--white);
       padding: 32px 24px;
       border-radius: 16px;
       box-shadow: var(--shadow-sm);
       border-left: 4px solid var(--primary-blue);
     }
-
-    h1 {
-      font-size: 32px;
-      font-weight: 800;
-      margin: 0 0 8px;
-      letter-spacing: -0.5px;
+    
+    h1 { 
+      font-size: 32px; 
+      font-weight: 800; 
+      margin: 0 0 8px; 
+      letter-spacing: -0.5px; 
       color: var(--dark-blue);
       line-height: 1.3;
     }
-
-    .subtitle {
-      font-size: 18px;
-      color: var(--light-blue);
-      margin: 0;
-      font-weight: 600;
+    
+    .subtitle { 
+      font-size: 18px; 
+      color: var(--light-blue); 
+      margin: 0; 
+      font-weight: 600; 
     }
 
     .controls-wrapper {
@@ -108,165 +119,186 @@
       margin-bottom: 32px;
     }
 
-    .controls {
+    .controls { 
       display: grid;
       grid-template-columns: 2fr 1.5fr auto;
       gap: 16px;
       margin-bottom: 20px;
       align-items: center;
     }
-
+    
     .search-box, .filter-box {
       position: relative;
       z-index: 1;
     }
-
+    
     .search-box input, .filter-box select {
-      width: 100%;
-      padding: 14px 18px;
-      border: 2px solid var(--border-light);
-      border-radius: 10px;
+      width: 100%; 
+      padding: 14px 18px; 
+      border: 2px solid var(--border-light); 
+      border-radius: 10px; 
       font-size: 15px;
-      font-family: inherit;
-      background: var(--white);
+      font-family: inherit; 
+      background: var(--white); 
       color: var(--text-color);
       transition: all 0.2s ease;
       font-weight: 500;
     }
-
+    
     .search-box input:focus, .filter-box select:focus {
-      outline: none;
-      border-color: var(--primary-blue);
+      outline: none; 
+      border-color: var(--primary-blue); 
       box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.1);
     }
-
-    .filter-box select { cursor: pointer; }
-
-    .action-buttons { display: flex; gap: 12px; }
+    
+    .filter-box select { 
+      cursor: pointer;
+    }
+    
+    .action-buttons { 
+      display: flex; 
+      gap: 12px; 
+    }
 
     button {
-      padding: 14px 24px;
-      border: 2px solid var(--primary-blue);
+      padding: 14px 24px; 
+      border: 2px solid var(--primary-blue); 
       background: var(--primary-blue);
-      color: var(--white);
-      font-size: 15px;
-      font-weight: 600;
-      border-radius: 10px;
+      color: var(--white); 
+      font-size: 15px; 
+      font-weight: 600; 
+      border-radius: 10px; 
       cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s ease;
+      font-family: inherit; 
+      transition: all 0.2s ease; 
       box-shadow: var(--shadow-sm);
       white-space: nowrap;
     }
-
-    button:hover {
-      background: var(--dark-blue);
-      border-color: var(--dark-blue);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-md);
+    
+    button:hover { 
+      background: var(--dark-blue); 
+      border-color: var(--dark-blue); 
+      transform: translateY(-2px); 
+      box-shadow: var(--shadow-md); 
     }
-
-    button:active { transform: translateY(0); }
-
-    #print-btn, #add-doctor-btn {
-      background: var(--white);
-      color: var(--primary-blue);
+    
+    button:active {
+      transform: translateY(0);
     }
-
-    #print-btn:hover, #add-doctor-btn:hover {
-      background: var(--border-light);
-      color: var(--dark-blue);
-      border-color: var(--dark-blue);
+    
+    #print-btn, #add-doctor-btn { 
+      background: var(--white); 
+      color: var(--primary-blue); 
     }
-
+    
+    #print-btn:hover, #add-doctor-btn:hover { 
+      background: var(--border-light); 
+      color: var(--dark-blue); 
+      border-color: var(--dark-blue); 
+    }
+    
     #add-doctor-btn {
       border-color: var(--success-green);
       color: var(--success-green);
       font-weight: 700;
     }
-
+    
     #add-doctor-btn:hover {
       background: var(--success-green);
       color: var(--white);
       border-color: var(--success-green);
     }
-
-    button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
+    
+    button:disabled { 
+      opacity: 0.5; 
+      cursor: not-allowed; 
+      transform: none; 
+      box-shadow: none; 
     }
 
-    .sort-controls { display: flex; gap: 10px; }
-
+    .sort-controls { 
+      display: flex; 
+      gap: 10px; 
+    }
+    
     .sort-btn {
-      padding: 10px 20px;
-      font-size: 14px;
+      padding: 10px 20px; 
+      font-size: 14px; 
       border: 2px solid var(--border-light);
-      background: var(--white);
-      color: var(--primary-blue);
+      background: var(--white); 
+      color: var(--primary-blue); 
       transition: all 0.2s ease;
       font-weight: 600;
     }
-
-    .sort-btn:hover { background: var(--border-light); transform: translateY(0); }
-    .sort-btn.active { background: var(--primary-blue); color: var(--white); border-color: var(--primary-blue); }
-    .sort-btn.active:hover { background: var(--dark-blue); }
-
-    .loading {
-      text-align: center;
-      padding: 60px;
-      font-size: 18px;
-      color: var(--primary-blue);
-      font-weight: 600;
+    
+    .sort-btn:hover { 
+      background: var(--border-light); 
+      transform: translateY(0);
+    }
+    
+    .sort-btn.active { 
+      background: var(--primary-blue); 
+      color: var(--white); 
+      border-color: var(--primary-blue); 
+    }
+    
+    .sort-btn.active:hover { 
+      background: var(--dark-blue); 
     }
 
+    .loading { 
+      text-align: center; 
+      padding: 60px; 
+      font-size: 18px; 
+      color: var(--primary-blue); 
+      font-weight: 600; 
+    }
+    
     .spinner {
-      display: inline-block;
-      width: 28px;
-      height: 28px;
+      display: inline-block; 
+      width: 28px; 
+      height: 28px; 
       border: 3px solid rgba(0,119,182,0.2);
-      border-top: 3px solid var(--primary-blue);
-      border-radius: 50%;
+      border-top: 3px solid var(--primary-blue); 
+      border-radius: 50%; 
       animation: spin 0.8s linear infinite;
-      margin-right: 12px;
+      margin-right: 12px; 
       vertical-align: middle;
     }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    
+    @keyframes spin { 
+      0% { transform: rotate(0deg); } 
+      100% { transform: rotate(360deg); } 
     }
-
-    .doctors-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 24px;
+    
+    .doctors-list { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+      gap: 24px; 
     }
-
-    .no-results {
-      text-align: center;
-      padding: 80px 20px;
-      font-size: 18px;
-      color: var(--light-blue);
-      font-weight: 600;
+    
+    .no-results { 
+      text-align: center; 
+      padding: 80px 20px; 
+      font-size: 18px; 
+      color: var(--light-blue); 
+      font-weight: 600; 
       background: var(--white);
       border-radius: 16px;
       box-shadow: var(--shadow-sm);
     }
 
     .doctor-card {
-      border: 2px solid var(--border-light);
-      padding: 28px;
-      border-radius: 14px;
+      border: 2px solid var(--border-light); 
+      padding: 28px; 
+      border-radius: 14px; 
       background: var(--white);
-      box-shadow: var(--shadow-sm);
+      box-shadow: var(--shadow-sm); 
       transition: all 0.3s cubic-bezier(0.25,0.8,0.25,1);
       position: relative;
       overflow: hidden;
     }
-
+    
     .doctor-card::before {
       content: '';
       position: absolute;
@@ -278,47 +310,52 @@
       transform: scaleY(0);
       transition: transform 0.3s ease;
     }
-
-    .doctor-card:hover::before { transform: scaleY(1); }
-
+    
+    .doctor-card:hover::before {
+      transform: scaleY(1);
+    }
+    
     .doctor-card:hover {
-      box-shadow: var(--shadow-lg);
-      transform: translateY(-4px);
+      box-shadow: var(--shadow-lg); 
+      transform: translateY(-4px); 
       border-color: var(--primary-blue);
     }
-
-    .doctor-name {
-      font-size: 22px;
-      font-weight: 700;
-      margin: 0 0 8px;
-      color: var(--dark-blue);
-      letter-spacing: -0.3px;
+    
+    .doctor-name { 
+      font-size: 22px; 
+      font-weight: 700; 
+      margin: 0 0 8px; 
+      color: var(--dark-blue); 
+      letter-spacing: -0.3px; 
     }
-
-    .doctor-specialty {
-      font-size: 15px;
-      color: var(--light-blue);
-      margin: 0 0 20px;
-      font-weight: 600;
+    
+    .doctor-specialty { 
+      font-size: 15px; 
+      color: var(--light-blue); 
+      margin: 0 0 20px; 
+      font-weight: 600; 
       padding: 6px 12px;
       background: rgba(0, 180, 216, 0.1);
       border-radius: 6px;
       display: inline-block;
     }
-
-    .doctor-phone { font-size: 17px; font-weight: 600; }
-
+    
+    .doctor-phone { 
+      font-size: 17px; 
+      font-weight: 600; 
+    }
+    
     .doctor-phone a {
-      color: var(--primary-blue);
-      text-decoration: none;
+      color: var(--primary-blue); 
+      text-decoration: none; 
       border-bottom: 2px solid transparent;
       transition: all 0.2s ease;
       padding-bottom: 2px;
     }
-
-    .doctor-phone a:hover {
-      color: var(--dark-blue);
-      border-bottom-color: var(--dark-blue);
+    
+    .doctor-phone a:hover { 
+      color: var(--dark-blue); 
+      border-bottom-color: var(--dark-blue); 
     }
 
     /* Modal Styles */
@@ -334,13 +371,23 @@
       backdrop-filter: blur(4px);
       animation: fadeIn 0.2s ease;
     }
-
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideUp {
-      from { opacity: 0; transform: translate(-50%, -45%); }
-      to { opacity: 1; transform: translate(-50%, -50%); }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
-
+    
+    @keyframes slideUp {
+      from { 
+        opacity: 0;
+        transform: translate(-50%, -45%); 
+      }
+      to { 
+        opacity: 1;
+        transform: translate(-50%, -50%); 
+      }
+    }
+    
     .modal-content {
       background-color: var(--white);
       position: absolute;
@@ -355,20 +402,20 @@
       animation: slideUp 0.3s ease;
       z-index: 1001;
     }
-
+    
     .modal-header {
       margin-bottom: 28px;
       padding-bottom: 20px;
       border-bottom: 2px solid var(--border-light);
     }
-
+    
     .modal-header h2 {
       font-size: 26px;
       font-weight: 800;
       color: var(--dark-blue);
       margin: 0;
     }
-
+    
     .close {
       color: #aaa;
       float: right;
@@ -378,11 +425,16 @@
       cursor: pointer;
       transition: color 0.2s;
     }
-
-    .close:hover, .close:focus { color: var(--error-red); }
-
-    .form-group { margin-bottom: 24px; }
-
+    
+    .close:hover,
+    .close:focus {
+      color: var(--error-red);
+    }
+    
+    .form-group {
+      margin-bottom: 24px;
+    }
+    
     .form-group label {
       display: block;
       margin-bottom: 8px;
@@ -392,8 +444,9 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
     }
-
-    .form-group input, .form-group select {
+    
+    .form-group input,
+    .form-group select {
       width: 100%;
       padding: 14px 16px;
       border: 2px solid var(--border-light);
@@ -403,37 +456,38 @@
       transition: all 0.2s ease;
       font-weight: 500;
     }
-
-    .form-group input:focus, .form-group select:focus {
+    
+    .form-group input:focus,
+    .form-group select:focus {
       outline: none;
       border-color: var(--primary-blue);
       box-shadow: 0 0 0 4px rgba(0, 119, 182, 0.1);
     }
-
+    
     .modal-buttons {
       display: flex;
       gap: 12px;
       margin-top: 32px;
     }
-
+    
     .modal-buttons button {
       flex: 1;
       padding: 16px;
       font-size: 16px;
       font-weight: 700;
     }
-
+    
     .btn-cancel {
       background: var(--white);
       color: var(--text-color);
       border-color: var(--border-light);
     }
-
+    
     .btn-cancel:hover {
       background: var(--border-light);
       border-color: var(--border-light);
     }
-
+    
     .error-message {
       color: var(--error-red);
       font-size: 13px;
@@ -441,7 +495,7 @@
       display: none;
       font-weight: 600;
     }
-
+    
     .success-message {
       background: var(--success-green);
       color: white;
@@ -462,28 +516,37 @@
       background: transparent;
       font-weight: 600;
     }
-
+    
     .footer p { margin: 0; }
 
     @media print {
-      .controls-wrapper, .action-buttons, .sort-controls, button, .footer, .modal, .firebase-status {
-        display: none !important;
+      .controls-wrapper, .action-buttons, .sort-controls, button, .footer, .modal, .firebase-status { 
+        display: none !important; 
       }
       .container { max-width: 100%; padding: 0; }
-      .doctor-card {
-        break-inside: avoid;
-        box-shadow: none !important;
-        border: 1px solid #ccc !important;
-        margin-bottom: 15px;
+      .doctor-card { 
+        break-inside: avoid; 
+        box-shadow: none !important; 
+        border: 1px solid #ccc !important; 
+        margin-bottom: 15px; 
       }
       body { background: #ffffff; }
       header { box-shadow: none; border: 1px solid #ccc; }
     }
 
     @media (max-width: 968px) {
-      .controls { grid-template-columns: 1fr; }
-      .action-buttons { width: 100%; }
-      .action-buttons button { flex: 1; }
+      .controls {
+        grid-template-columns: 1fr;
+      }
+      
+      .action-buttons {
+        width: 100%;
+      }
+      
+      .action-buttons button {
+        flex: 1;
+      }
+      
       .firebase-status {
         top: 10px;
         right: 10px;
@@ -504,8 +567,8 @@
     }
   </style>
 </head>
-
 <body>
+
   <!-- Firebase Connection Status -->
   <div id="firebase-status" class="firebase-status connecting">
     <span class="status-dot"></span>
@@ -518,9 +581,9 @@
         <h1 id="clinic-title">თბილისის სახელმწიფო სამედიცინო უნივერსიტეტისა და ინგოროყვას მაღალი სამედიცინო ტექნოლოგიების საუნივერსიტეტო კლინიკა</h1>
         <p class="subtitle" id="clinic-subtitle">ექიმების სატელეფონო სია</p>
       </header>
-
+      
       <div class="success-message" id="success-message"></div>
-
+      
       <div class="controls-wrapper">
         <div class="controls">
           <div class="search-box">
@@ -537,19 +600,17 @@
             <button id="print-btn" type="button" onclick="window.print()"><span id="print-text">ბეჭდვა</span></button>
           </div>
         </div>
-
+        
         <div class="sort-controls">
           <button class="sort-btn active" id="sort-name" type="button">A to Z (სახელი)</button>
           <button class="sort-btn" id="sort-specialty" type="button">სპეციალობა</button>
         </div>
       </div>
-
+      
       <div id="loading" class="loading" style="display: none;">
         <span class="spinner"></span> მონაცემები იტვირთება...
       </div>
-
       <div id="doctors-list" class="doctors-list"></div>
-
       <div id="no-results" class="no-results" style="display: none;">
         შედეგები არ მოიძებნა
       </div>
@@ -563,14 +624,13 @@
         <span class="close">&times;</span>
         <h2>ახალი ექიმის დამატება</h2>
       </div>
-
       <form id="add-doctor-form">
         <div class="form-group">
           <label for="doctor-name">სახელი და გვარი *</label>
           <input type="text" id="doctor-name" required placeholder="მაგ: გიორგი გელაშვილი">
           <div class="error-message" id="name-error">გთხოვთ შეიყვანოთ სახელი და გვარი</div>
         </div>
-
+        
         <div class="form-group">
           <label for="doctor-specialty">განყოფილება *</label>
           <select id="doctor-specialty" required>
@@ -612,13 +672,13 @@
           </select>
           <div class="error-message" id="specialty-error">გთხოვთ აირჩიოთ განყოფილება</div>
         </div>
-
+        
         <div class="form-group">
           <label for="doctor-phone">ტელეფონის ნომერი *</label>
           <input type="tel" id="doctor-phone" required placeholder="მაგ: 599 12 34 56">
           <div class="error-message" id="phone-error">გთხოვთ შეიყვანოთ ტელეფონის ნომერი</div>
         </div>
-
+        
         <div class="modal-buttons">
           <button type="button" class="btn-cancel" id="cancel-btn">გაუქმება</button>
           <button type="submit" id="submit-btn">დამატება</button>
@@ -628,61 +688,15 @@
   </div>
 
   <footer class="footer">
-    <p>created by IMED🩺</p>
+    <p>made by IMED</p>
   </footer>
 
   <!-- Firebase SDK v9 (Modular) -->
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-    import {
-      getFirestore,
-      collection,
-      addDoc,
-      onSnapshot,
-      serverTimestamp
-    } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+    import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
-    // ============ UI HELPERS ============
-    function updateFirebaseStatus(status, detailText = '') {
-      const statusElement = document.getElementById('firebase-status');
-      const statusText = document.getElementById('status-text');
-      statusElement.className = 'firebase-status ' + status;
-
-      if (status === 'connected') {
-        statusText.textContent = '✓ Firebase დაკავშირებულია';
-      } else if (status === 'disconnected') {
-        statusText.textContent = detailText ? ('✗ ' + detailText) : '✗ Firebase გამორთულია';
-      } else {
-        statusText.textContent = 'უკავშირდება...';
-      }
-    }
-
-    function setLoading(on) {
-      const loading = document.getElementById('loading');
-      const list = document.getElementById('doctors-list');
-      const nores = document.getElementById('no-results');
-
-      loading.style.display = on ? 'block' : 'none';
-      if (on) {
-        list.style.display = 'none';
-        nores.style.display = 'none';
-      }
-    }
-
-    // Show success/error message
-    function showMessage(message, type) {
-      const messageEl = document.getElementById('success-message');
-      messageEl.textContent = message;
-      messageEl.style.display = 'block';
-      messageEl.style.background = type === 'success' ? 'var(--success-green)' : 'var(--error-red)';
-      setTimeout(() => { messageEl.style.display = 'none'; }, 3500);
-    }
-
-    function normalizePhone(s) {
-      return String(s || '').replace(/[^0-9]/g, '');
-    }
-
-    // ============ FIREBASE CONFIG ============
+    // Firebase Configuration
     const firebaseConfig = {
       apiKey: "AIzaSyAjGwo4BWRR2BZNewA91oiTSJjMePXNenE",
       authDomain: "medical-phone-directory.firebaseapp.com",
@@ -693,22 +707,37 @@
       measurementId: "G-6N279Y263K"
     };
 
+    // Initialize Firebase
     let app, db;
     let isFirebaseConnected = false;
+    
+    // Update Firebase Status UI
+    function updateFirebaseStatus(status) {
+      const statusElement = document.getElementById('firebase-status');
+      const statusText = document.getElementById('status-text');
+      
+      statusElement.className = 'firebase-status ' + status;
+      
+      if (status === 'connected') {
+        statusText.textContent = '✓ Firebase დაკავშირებულია';
+      } else if (status === 'disconnected') {
+        statusText.textContent = '✗ Firebase გამორთულია';
+      } else {
+        statusText.textContent = 'უკავშირდება...';
+      }
+    }
 
     try {
       app = initializeApp(firebaseConfig);
       db = getFirestore(app);
-      isFirebaseConnected = true;
       updateFirebaseStatus('connected');
+      isFirebaseConnected = true;
       console.log('✅ Firebase დაკავშირებულია წარმატებით!');
     } catch (error) {
-      isFirebaseConnected = false;
-      updateFirebaseStatus('disconnected', 'Firebase-თან კავშირი ვერ მოხერხდა');
+      updateFirebaseStatus('disconnected');
       console.error('❌ Firebase-თან დაკავშირება ვერ მოხერხდა:', error);
     }
 
-    let unsubscribe = null;
     let allDoctors = [];
     let currentSort = 'name';
 
@@ -816,7 +845,7 @@
       { name: 'დათო კახიძე', specialty: 'ზოგადი რეანიმაცია', phone: '598 535 337', isInitial: true },
       { name: 'შორენა მურმანიშვილი', specialty: 'ზოგადი რეანიმაცია', phone: '599 361 288', isInitial: true },
       { name: 'თამუნა ხუციშვილი', specialty: 'ზოგადი რეანიმაცია', phone: '599 141 380', isInitial: true },
-      { name: 'ლიკა ქობლიანიძე', specialty: 'ზოგადი რეანიმაცია', phone: '599 313 345', isInitial: true },
+      { name: 'ლიკა ქობლianიძე', specialty: 'ზოგადი რეანიმაცია', phone: '599 313 345', isInitial: true },
       { name: 'ნათია ჯიყაშვილი', specialty: 'ზოგადი რეანიმაცია', phone: '592 058 180', isInitial: true },
       { name: 'ვახტანგ ჩიქოვანი', specialty: 'ზოგადი რეანიმაცია', phone: '599 420 576', isInitial: true },
       { name: 'მარიამ მერებაშვილი', specialty: 'ზოგადი რეანიმაცია', phone: '598 477 662', isInitial: true },
@@ -857,51 +886,248 @@
       { name: 'თინათინ ნაფეტვარიძე', specialty: 'კარდიოლოგია', phone: '598 358 522', isInitial: true }
     ];
 
-    // ============ FILTER + RENDER ============
-    function populateSpecialtyFilter() {
-      const uniq = [...new Set(allDoctors.map(d => d.specialty).filter(Boolean))]
-        .sort((a,b) => a.localeCompare(b,'ka'));
+    // ✅ DUPLICATE CHECK (name OR phone)
+    function doctorAlreadyExists(name, phone) {
+      const cleanName = String(name || '').trim().toLowerCase();
+      const cleanPhone = String(phone || '').replace(/\s/g, '').replace(/[^0-9]/g, '');
 
+      return allDoctors.some(d => {
+        const existingName = String(d.name || '').trim().toLowerCase();
+        const existingPhone = String(d.phone || '').replace(/\s/g, '').replace(/[^0-9]/g, '');
+        return existingName === cleanName || existingPhone === cleanPhone;
+      });
+    }
+
+    // Load doctors from Firebase and merge with initial list
+    async function loadDoctorsFromFirebase() {
+      allDoctors = [...initialDoctors];
+
+      if (!isFirebaseConnected) {
+        console.log('Firebase არ არის დაკავშირებული, ვიყენებთ მხოლოდ საწყის სიას');
+        populateSpecialtyFilter();
+        renderDoctors();
+        return;
+      }
+
+      try {
+        const doctorsCollection = collection(db, 'doctors');
+
+        onSnapshot(
+          doctorsCollection,
+          (snapshot) => {
+            allDoctors = [...initialDoctors];
+
+            snapshot.forEach((doc) => {
+              allDoctors.push({
+                id: doc.id,
+                ...doc.data(),
+                isInitial: false
+              });
+            });
+
+            console.log(`📋 სულ ჩაიტვირთა ${allDoctors.length} ექიმი (საწყისი: ${initialDoctors.length}, დამატებული: ${snapshot.size})`);
+            populateSpecialtyFilter();
+            renderDoctors();
+          },
+          (error) => {
+            console.error('❌ onSnapshot error:', error);
+            updateFirebaseStatus('disconnected');
+            // Still show initial list
+            populateSpecialtyFilter();
+            renderDoctors();
+            showMessage('Firebase წვდომა არ გაქვთ (Rules) - მუშაობს მხოლოდ საწყისი სია', 'error');
+          }
+        );
+
+      } catch (error) {
+        console.error('❌ ექიმების ჩატვირთვა ვერ მოხერხდა:', error);
+        showMessage('მონაცემების ჩატვირთვა ვერ მოხერხდა', 'error');
+        populateSpecialtyFilter();
+        renderDoctors();
+      }
+    }
+
+    // Add doctor to Firebase
+    async function addDoctorToFirebase(doctorData) {
+      if (!isFirebaseConnected) {
+        showMessage('Firebase არ არის დაკავშირებული', 'error');
+        return false;
+      }
+
+      try {
+        const doctorsCollection = collection(db, 'doctors');
+        await addDoc(doctorsCollection, {
+          ...doctorData,
+          createdAt: serverTimestamp()
+        });
+
+        console.log('✅ ექიმი წარმატებით დაემატა Firebase-ში');
+        showMessage('ექიმი წარმატებით დაემატა!', 'success');
+        return true;
+      } catch (error) {
+        console.error('❌ ექიმის დამატება ვერ მოხერხდა:', error);
+        showMessage('ექიმის დამატება ვერ მოხერხდა', 'error');
+        return false;
+      }
+    }
+
+    // Show success/error message
+    function showMessage(message, type) {
+      const messageEl = document.getElementById('success-message');
+      messageEl.textContent = message;
+      messageEl.style.display = 'block';
+      messageEl.style.background = type === 'success' ? 'var(--success-green)' : 'var(--error-red)';
+
+      setTimeout(() => {
+        messageEl.style.display = 'none';
+      }, 3000);
+    }
+
+    // Modal functionality
+    const modal = document.getElementById('add-doctor-modal');
+    const addBtn = document.getElementById('add-doctor-btn');
+    const closeBtn = document.getElementsByClassName('close')[0];
+    const cancelBtn = document.getElementById('cancel-btn');
+    const form = document.getElementById('add-doctor-form');
+
+    console.log('Modal elements:', { modal, addBtn, closeBtn, cancelBtn, form });
+
+    addBtn.onclick = function(e) {
+      e.preventDefault();
+      console.log('Add button clicked!');
+      modal.style.display = 'block';
+      form.reset();
+      hideErrors();
+    }
+
+    closeBtn.onclick = function(e) {
+      e.preventDefault();
+      modal.style.display = 'none';
+    }
+
+    cancelBtn.onclick = function(e) {
+      e.preventDefault();
+      modal.style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    }
+
+    form.onsubmit = async function(e) {
+      e.preventDefault();
+      console.log('Form submitted!');
+
+      const name = document.getElementById('doctor-name').value.trim();
+      const specialty = document.getElementById('doctor-specialty').value;
+      const phone = document.getElementById('doctor-phone').value.trim();
+
+      let isValid = true;
+      hideErrors();
+
+      if (!name) {
+        showError('name-error');
+        isValid = false;
+      }
+
+      if (!specialty) {
+        showError('specialty-error');
+        isValid = false;
+      }
+
+      if (!phone) {
+        showError('phone-error');
+        isValid = false;
+      }
+
+      if (isValid) {
+        // 🚫 Duplicate check (name OR phone)
+        if (doctorAlreadyExists(name, phone)) {
+          showMessage('ექიმი უკვე დამატებულია', 'error');
+          return;
+        }
+
+        const newDoctor = {
+          name: name,
+          specialty: specialty,
+          phone: phone
+        };
+
+        const success = await addDoctorToFirebase(newDoctor);
+
+        if (success) {
+          modal.style.display = 'none';
+          form.reset();
+        }
+      }
+    }
+
+    function showError(id) {
+      document.getElementById(id).style.display = 'block';
+    }
+
+    function hideErrors() {
+      document.querySelectorAll('.error-message').forEach(el => {
+        el.style.display = 'none';
+      });
+    }
+
+    function setupEventListeners() {
+      document.getElementById('search-input').addEventListener('input', renderDoctors);
+      document.getElementById('specialty-filter').addEventListener('change', function(e) {
+        console.log('Specialty changed:', e.target.value);
+        renderDoctors();
+      });
+      document.getElementById('refresh-btn').addEventListener('click', loadDoctorsFromFirebase);
+      document.getElementById('sort-name').addEventListener('click', () => { 
+        currentSort = 'name'; 
+        toggleSortActive('sort-name'); 
+        renderDoctors(); 
+      });
+      document.getElementById('sort-specialty').addEventListener('click', () => { 
+        currentSort = 'specialty'; 
+        toggleSortActive('sort-specialty'); 
+        renderDoctors(); 
+      });
+    }
+
+    function toggleSortActive(id) {
+      document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function populateSpecialtyFilter() {
+      const uniq = [...new Set(allDoctors.map(d => d.specialty))].sort((a,b) => a.localeCompare(b,'ka'));
       const sel = document.getElementById('specialty-filter');
       const currentValue = sel.value;
       sel.innerHTML = '<option value="">ყველა სპეციალობა</option>';
-
-      uniq.forEach(s => {
-        const o = document.createElement('option');
-        o.value = s;
-        o.textContent = s;
-        sel.appendChild(o);
+      uniq.forEach(s => { 
+        const o = document.createElement('option'); 
+        o.value = s; 
+        o.textContent = s; 
+        sel.appendChild(o); 
       });
-
-      // Try to keep selected value if still exists
-      const stillExists = [...sel.options].some(o => o.value === currentValue);
-      sel.value = stillExists ? currentValue : '';
+      sel.value = currentValue;
+      console.log('Populated specialties:', uniq.length);
     }
 
     function renderDoctors() {
-      const searchRaw = document.getElementById('search-input').value || '';
-      const search = searchRaw.toLowerCase().trim();
-      const searchDigits = normalizePhone(searchRaw);
+      const search = document.getElementById('search-input').value.toLowerCase();
       const spec = document.getElementById('specialty-filter').value;
 
       let filtered = allDoctors.filter(d => {
-        const name = String(d.name || '').toLowerCase();
-        const phoneDigits = normalizePhone(d.phone);
-
         const matchesSearch =
-          !search ||
-          name.includes(search) ||
-          (searchDigits && phoneDigits.includes(searchDigits));
-
+          String(d.name || '').toLowerCase().includes(search) ||
+          String(d.phone || '').replace(/\s/g, '').includes(search.replace(/\s/g, ''));
         const matchesSpecialty = !spec || d.specialty === spec;
         return matchesSearch && matchesSpecialty;
       });
 
-      filtered.sort(
-        currentSort === 'name'
-          ? (a,b) => String(a.name || '').localeCompare(String(b.name || ''),'ka')
-          : (a,b) => String(a.specialty || '').localeCompare(String(b.specialty || ''),'ka')
-                    || String(a.name || '').localeCompare(String(b.name || ''),'ka')
+      filtered.sort(currentSort === 'name'
+        ? (a,b) => String(a.name || '').localeCompare(String(b.name || ''),'ka')
+        : (a,b) => String(a.specialty || '').localeCompare(String(b.specialty || ''),'ka') || String(a.name || '').localeCompare(String(b.name || ''),'ka')
       );
 
       const list = document.getElementById('doctors-list');
@@ -923,239 +1149,34 @@
 
         const name = document.createElement('div');
         name.className = 'doctor-name';
-        name.textContent = d.name || '';
+        name.textContent = d.name;
 
         const specEl = document.createElement('div');
         specEl.className = 'doctor-specialty';
-        specEl.textContent = d.specialty || '';
+        specEl.textContent = d.specialty;
 
         const phone = document.createElement('div');
         phone.className = 'doctor-phone';
 
         const link = document.createElement('a');
-        const digits = normalizePhone(d.phone);
+        const digits = String(d.phone || '').replace(/\s/g,'').replace(/[^0-9]/g,'');
         link.href = `tel:+995${digits}`;
-        link.textContent = d.phone || '';
-        phone.appendChild(link);
+        link.textContent = d.phone;
 
+        phone.appendChild(link);
         card.append(name, specEl, phone);
         list.appendChild(card);
       });
     }
 
-    // ============ FIREBASE LOADING ============
-    function stopListener() {
-      if (typeof unsubscribe === 'function') {
-        try { unsubscribe(); } catch (_) {}
-      }
-      unsubscribe = null;
-    }
-
-    async function loadDoctorsFromFirebase() {
-      setLoading(true);
-
-      // Always start with initial list so UI NEVER becomes empty
-      allDoctors = [...initialDoctors];
-      populateSpecialtyFilter();
-      renderDoctors();
-
-      // If firebase not connected, stop here
-      if (!isFirebaseConnected || !db) {
-        updateFirebaseStatus('disconnected', 'Firebase არ არის დაკავშირებული');
-        setLoading(false);
-        return;
-      }
-
-      try {
-        stopListener();
-        const doctorsCollection = collection(db, 'doctors');
-
-        // ✅ Added error handler for onSnapshot
-        unsubscribe = onSnapshot(
-          doctorsCollection,
-          (snapshot) => {
-            updateFirebaseStatus('connected');
-            isFirebaseConnected = true;
-
-            allDoctors = [...initialDoctors];
-            snapshot.forEach((docSnap) => {
-              allDoctors.push({
-                id: docSnap.id,
-                ...docSnap.data(),
-                isInitial: false
-              });
-            });
-
-            console.log(`📋 სულ ჩაიტვირთა ${allDoctors.length} ექიმი (საწყისი: ${initialDoctors.length}, დამატებული: ${snapshot.size})`);
-            populateSpecialtyFilter();
-            renderDoctors();
-            setLoading(false);
-          },
-          (err) => {
-            console.error('❌ onSnapshot error:', err);
-            isFirebaseConnected = false;
-
-            // Typical: permission-denied, unavailable, etc.
-            const msg = err?.code ? `Firebase შეცდომა: ${err.code}` : 'Firebase შეცდომა';
-            updateFirebaseStatus('disconnected', msg);
-            showMessage(msg, 'error');
-
-            // Keep initial list visible
-            allDoctors = [...initialDoctors];
-            populateSpecialtyFilter();
-            renderDoctors();
-            setLoading(false);
-          }
-        );
-
-      } catch (error) {
-        console.error('❌ ექიმების ჩატვირთვა ვერ მოხერხდა:', error);
-        isFirebaseConnected = false;
-        updateFirebaseStatus('disconnected', 'მონაცემები ვერ ჩაიტვირთა');
-        showMessage('მონაცემების ჩატვირთვა ვერ მოხერხდა', 'error');
-
-        allDoctors = [...initialDoctors];
-        populateSpecialtyFilter();
-        renderDoctors();
-        setLoading(false);
-      }
-    }
-
-    async function addDoctorToFirebase(doctorData) {
-      if (!db) {
-        showMessage('Firebase არ არის ინიციალიზებული', 'error');
-        return false;
-      }
-
-      try {
-        const doctorsCollection = collection(db, 'doctors');
-        await addDoc(doctorsCollection, {
-          ...doctorData,
-          createdAt: serverTimestamp()
-        });
-
-        console.log('✅ ექიმი წარმატებით დაემატა Firebase-ში');
-        showMessage('ექიმი წარმატებით დაემატა!', 'success');
-        return true;
-
-      } catch (error) {
-        console.error('❌ ექიმის დამატება ვერ მოხერხდა:', error);
-
-        // Show real reason to you
-        const msg = error?.code ? `ექიმის დამატება ვერ მოხერხდა: ${error.code}` : 'ექიმის დამატება ვერ მოხერხდა';
-        showMessage(msg, 'error');
-        updateFirebaseStatus('disconnected', msg);
-        return false;
-      }
-    }
-
-    // ============ MODAL ============
-    const modal = document.getElementById('add-doctor-modal');
-    const addBtn = document.getElementById('add-doctor-btn');
-    const closeBtn = document.getElementsByClassName('close')[0];
-    const cancelBtn = document.getElementById('cancel-btn');
-    const form = document.getElementById('add-doctor-form');
-
-    addBtn.onclick = function(e) {
-      e.preventDefault();
-      modal.style.display = 'block';
-      form.reset();
-      hideErrors();
-    };
-
-    closeBtn.onclick = function(e) {
-      e.preventDefault();
-      modal.style.display = 'none';
-    };
-
-    cancelBtn.onclick = function(e) {
-      e.preventDefault();
-      modal.style.display = 'none';
-    };
-
-    window.onclick = function(event) {
-      if (event.target === modal) {
-        modal.style.display = 'none';
-      }
-    };
-
-    form.onsubmit = async function(e) {
-      e.preventDefault();
-
-      const name = document.getElementById('doctor-name').value.trim();
-      const specialty = document.getElementById('doctor-specialty').value;
-      const phone = document.getElementById('doctor-phone').value.trim();
-
-      let isValid = true;
-      hideErrors();
-
-      if (!name) { showError('name-error'); isValid = false; }
-      if (!specialty) { showError('specialty-error'); isValid = false; }
-      if (!phone) { showError('phone-error'); isValid = false; }
-
-      if (!isValid) return;
-
-      const newDoctor = { name, specialty, phone };
-      const success = await addDoctorToFirebase(newDoctor);
-
-      if (success) {
-        modal.style.display = 'none';
-        form.reset();
-      }
-    };
-
-    function showError(id) {
-      document.getElementById(id).style.display = 'block';
-    }
-
-    function hideErrors() {
-      document.querySelectorAll('.error-message').forEach(el => {
-        el.style.display = 'none';
-      });
-    }
-
-    // ============ EVENTS ============
-    function toggleSortActive(id) {
-      document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
-
-    function setupEventListeners() {
-      document.getElementById('search-input').addEventListener('input', renderDoctors);
-      document.getElementById('specialty-filter').addEventListener('change', renderDoctors);
-
-      document.getElementById('refresh-btn').addEventListener('click', () => {
-        loadDoctorsFromFirebase();
-      });
-
-      document.getElementById('sort-name').addEventListener('click', () => {
-        currentSort = 'name';
-        toggleSortActive('sort-name');
-        renderDoctors();
-      });
-
-      document.getElementById('sort-specialty').addEventListener('click', () => {
-        currentSort = 'specialty';
-        toggleSortActive('sort-specialty');
-        renderDoctors();
-      });
-    }
-
-    // ============ INIT ============
+    // Initialize
     function initDirectory() {
       console.log('Initializing directory...');
-
       setupEventListeners();
-
-      // ✅ Immediately show initial list + fill specialties
-      allDoctors = [...initialDoctors];
-      populateSpecialtyFilter();
-      renderDoctors();
-
-      // Then try firebase sync
       loadDoctorsFromFirebase();
     }
 
+    // Start the app
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', initDirectory);
     } else {
