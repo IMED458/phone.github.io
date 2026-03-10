@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Phone icon">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#07a9ff"/>
+      <stop offset="100%" stop-color="#142fcb"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="256" fill="url(#bg)"/>
+  <path d="M141 230c29 57 85 113 142 142l46-46c6-6 15-8 23-5 24 8 50 12 76 12 12 0 22 10 22 22v58c0 12-10 22-22 22C208 435 77 304 77 142c0-12 10-22 22-22h58c12 0 22 10 22 22 0 26 4 52 12 76 3 8 1 17-5 23l-45 45z" fill="#e6e6e6"/>
+</svg>

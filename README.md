@@ -3,6 +3,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Medical Directory</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="shortcut icon" href="favicon.svg">
   <style>
     :root {
         --primary-blue: #0077b6;
@@ -93,6 +95,46 @@
       border-radius: 16px;
       box-shadow: var(--shadow-sm);
       border-left: 4px solid var(--primary-blue);
+      position: relative;
+    }
+
+    .admin-controls {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .admin-btn {
+      padding: 8px 14px;
+      font-size: 13px;
+      border-radius: 999px;
+      box-shadow: none;
+      border-width: 1px;
+    }
+
+    #admin-login-btn {
+      background: #e9f4ff;
+      color: var(--dark-blue);
+      border-color: #b9dbff;
+    }
+
+    #admin-login-btn:hover {
+      background: #d6ecff;
+      border-color: #8bc4ff;
+    }
+
+    #admin-logout-btn {
+      background: #fff6f6;
+      color: #b4232f;
+      border-color: #f0c9ce;
+      display: none;
+    }
+
+    #admin-logout-btn:hover {
+      background: #ffe8eb;
+      border-color: #eaa4ad;
     }
     
     h1 { 
@@ -158,6 +200,7 @@
     .action-buttons { 
       display: flex; 
       gap: 12px; 
+      justify-content: flex-end;
     }
 
     button {
@@ -186,12 +229,12 @@
       transform: translateY(0);
     }
     
-    #print-btn, #add-doctor-btn { 
+    #add-doctor-btn { 
       background: var(--white); 
       color: var(--primary-blue); 
     }
     
-    #print-btn:hover, #add-doctor-btn:hover { 
+    #add-doctor-btn:hover { 
       background: var(--border-light); 
       color: var(--dark-blue); 
       border-color: var(--dark-blue); 
@@ -207,6 +250,16 @@
       background: var(--success-green);
       color: var(--white);
       border-color: var(--success-green);
+    }
+
+    [data-admin-only] {
+      display: none !important;
+    }
+
+    body.admin-mode [data-admin-only] {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
     }
     
     button:disabled { 
@@ -356,6 +409,41 @@
     .doctor-phone a:hover { 
       color: var(--dark-blue); 
       border-bottom-color: var(--dark-blue); 
+    }
+
+    .doctor-comment {
+      margin-top: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(0, 119, 182, 0.1);
+      color: var(--dark-blue);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .doctor-actions {
+      margin-top: 16px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .card-edit-btn {
+      background: #f3f9ff;
+      color: var(--dark-blue);
+      border: 1px solid #b9dbff;
+      box-shadow: none;
+      padding: 8px 12px;
+      font-size: 13px;
+      border-radius: 8px;
+    }
+
+    .card-edit-btn:hover {
+      background: #deefff;
+      border-color: #8bc4ff;
+      transform: none;
     }
 
     /* Modal Styles */
@@ -520,7 +608,7 @@
     .footer p { margin: 0; }
 
     @media print {
-      .controls-wrapper, .action-buttons, .sort-controls, button, .footer, .modal, .firebase-status { 
+      .controls-wrapper, .sort-controls, button, .footer, .modal, .firebase-status, .admin-controls { 
         display: none !important; 
       }
       .container { max-width: 100%; padding: 0; }
@@ -559,11 +647,19 @@
       .container { padding: 24px 16px; }
       h1 { font-size: 24px; }
       .subtitle { font-size: 16px; }
-      header { padding: 24px 20px; }
+      header { padding: 56px 20px 24px; }
       .controls-wrapper { padding: 20px; }
       .sort-controls { flex-wrap: wrap; gap: 8px; }
       .doctors-list { grid-template-columns: 1fr; }
       .modal-content { padding: 28px 24px; }
+      .admin-controls {
+        top: 10px;
+        right: 10px;
+      }
+      .admin-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+      }
     }
   </style>
 </head>
@@ -578,6 +674,10 @@
   <div id="main-content">
     <div class="container">
       <header>
+        <div class="admin-controls">
+          <button id="admin-login-btn" class="admin-btn" type="button">ადმინის შესვლა</button>
+          <button id="admin-logout-btn" class="admin-btn" type="button" data-admin-only>გამოსვლა</button>
+        </div>
         <h1 id="clinic-title">თბილისის სახელმწიფო სამედიცინო უნივერსიტეტისა და ინგოროყვას მაღალი სამედიცინო ტექნოლოგიების საუნივერსიტეტო კლინიკა</h1>
         <p class="subtitle" id="clinic-subtitle">ექიმების სატელეფონო სია</p>
       </header>
@@ -595,9 +695,8 @@
             </select>
           </div>
           <div class="action-buttons">
-            <button id="add-doctor-btn" type="button">+ დამატება</button>
             <button id="refresh-btn" type="button"><span id="refresh-text">განახლება</span></button>
-            <button id="print-btn" type="button" onclick="window.print()"><span id="print-text">ბეჭდვა</span></button>
+            <button id="add-doctor-btn" type="button" data-admin-only>+ დამატება</button>
           </div>
         </div>
         
@@ -619,10 +718,10 @@
 
   <!-- Add Doctor Modal -->
   <div id="add-doctor-modal" class="modal">
-    <div class="modal-content">
+      <div class="modal-content">
       <div class="modal-header">
         <span class="close">&times;</span>
-        <h2>ახალი ექიმის დამატება</h2>
+        <h2 id="modal-title">ახალი ექიმის დამატება</h2>
       </div>
       <form id="add-doctor-form">
         <div class="form-group">
@@ -678,6 +777,11 @@
           <input type="tel" id="doctor-phone" required placeholder="მაგ: 599 12 34 56">
           <div class="error-message" id="phone-error">გთხოვთ შეიყვანოთ ტელეფონის ნომერი</div>
         </div>
+
+        <div class="form-group">
+          <label for="doctor-comment">კომენტარი</label>
+          <input type="text" id="doctor-comment" placeholder="მაგ: განყოფილების უფროსი">
+        </div>
         
         <div class="modal-buttons">
           <button type="button" class="btn-cancel" id="cancel-btn">გაუქმება</button>
@@ -694,7 +798,7 @@
   <!-- Firebase SDK v9 (Modular) -->
   <script type="module">
     import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-    import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
+    import { getFirestore, collection, addDoc, onSnapshot, serverTimestamp, doc, updateDoc, setDoc } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js';
 
     // Firebase Configuration
     const firebaseConfig = {
@@ -738,8 +842,16 @@
       console.error('❌ Firebase-თან დაკავშირება ვერ მოხერხდა:', error);
     }
 
+    const ADMIN_PASSWORD = 'imed458';
+
     let allDoctors = [];
+    let firebaseDoctors = [];
+    let doctorOverrides = new Map();
     let currentSort = 'name';
+    let isAdminMode = false;
+    let editingDoctor = null;
+    let unsubscribeDoctors = null;
+    let unsubscribeOverrides = null;
 
     // Initial Doctors List - მუდმივი სია
     const initialDoctors = [
@@ -884,66 +996,112 @@
       { name: 'ბაქარ ცნობილაძე', specialty: 'კარდიოლოგია', phone: '568 817 537', isInitial: true },
       { name: 'ნინო გიორგაძე', specialty: 'კარდიოლოგია', phone: '577 970 910', isInitial: true },
       { name: 'თინათინ ნაფეტვარიძე', specialty: 'კარდიოლოგია', phone: '598 358 522', isInitial: true }
-    ];
+    ].map((doctor, index) => ({
+      ...doctor,
+      sourceKey: `initial-${index}`
+    }));
 
     // ✅ DUPLICATE CHECK (name OR phone)
-    function doctorAlreadyExists(name, phone) {
+    function doctorAlreadyExists(name, phone, ignoreSourceKey = null) {
       const cleanName = String(name || '').trim().toLowerCase();
       const cleanPhone = String(phone || '').replace(/\s/g, '').replace(/[^0-9]/g, '');
 
-      return allDoctors.some(d => {
+      return allDoctors.some((d) => {
+        if (ignoreSourceKey && d.sourceKey === ignoreSourceKey) {
+          return false;
+        }
         const existingName = String(d.name || '').trim().toLowerCase();
         const existingPhone = String(d.phone || '').replace(/\s/g, '').replace(/[^0-9]/g, '');
         return existingName === cleanName || existingPhone === cleanPhone;
       });
     }
 
+    function rebuildDoctorsList() {
+      const mergedInitialDoctors = initialDoctors.map((doctor) => {
+        const overrideData = doctorOverrides.get(doctor.sourceKey);
+        if (!overrideData) {
+          return doctor;
+        }
+
+        return {
+          ...doctor,
+          name: overrideData.name || doctor.name,
+          specialty: overrideData.specialty || doctor.specialty,
+          phone: overrideData.phone || doctor.phone,
+          comment: overrideData.comment || ''
+        };
+      });
+
+      allDoctors = [...mergedInitialDoctors, ...firebaseDoctors];
+      populateSpecialtyFilter();
+      renderDoctors();
+    }
+
     // Load doctors from Firebase and merge with initial list
     async function loadDoctorsFromFirebase() {
+      if (unsubscribeDoctors) {
+        unsubscribeDoctors();
+        unsubscribeDoctors = null;
+      }
+      if (unsubscribeOverrides) {
+        unsubscribeOverrides();
+        unsubscribeOverrides = null;
+      }
+
+      firebaseDoctors = [];
+      doctorOverrides = new Map();
       allDoctors = [...initialDoctors];
+      populateSpecialtyFilter();
+      renderDoctors();
 
       if (!isFirebaseConnected) {
         console.log('Firebase არ არის დაკავშირებული, ვიყენებთ მხოლოდ საწყის სიას');
-        populateSpecialtyFilter();
-        renderDoctors();
         return;
       }
 
       try {
         const doctorsCollection = collection(db, 'doctors');
+        const overridesCollection = collection(db, 'doctor_overrides');
 
-        onSnapshot(
+        unsubscribeDoctors = onSnapshot(
           doctorsCollection,
           (snapshot) => {
-            allDoctors = [...initialDoctors];
-
-            snapshot.forEach((doc) => {
-              allDoctors.push({
-                id: doc.id,
-                ...doc.data(),
-                isInitial: false
-              });
-            });
-
-            console.log(`📋 სულ ჩაიტვირთა ${allDoctors.length} ექიმი (საწყისი: ${initialDoctors.length}, დამატებული: ${snapshot.size})`);
-            populateSpecialtyFilter();
-            renderDoctors();
+            firebaseDoctors = snapshot.docs.map((docSnap) => ({
+              id: docSnap.id,
+              ...docSnap.data(),
+              isInitial: false,
+              sourceKey: `firebase-${docSnap.id}`
+            }));
+            console.log(`📋 Firebase დამატებული ექიმები: ${snapshot.size}`);
+            rebuildDoctorsList();
           },
           (error) => {
-            console.error('❌ onSnapshot error:', error);
+            console.error('❌ doctors onSnapshot error:', error);
             updateFirebaseStatus('disconnected');
-            // Still show initial list
-            populateSpecialtyFilter();
-            renderDoctors();
             showMessage('Firebase წვდომა არ გაქვთ (Rules) - მუშაობს მხოლოდ საწყისი სია', 'error');
           }
         );
 
+        unsubscribeOverrides = onSnapshot(
+          overridesCollection,
+          (snapshot) => {
+            const nextOverrides = new Map();
+            snapshot.forEach((docSnap) => {
+              nextOverrides.set(docSnap.id, docSnap.data());
+            });
+            doctorOverrides = nextOverrides;
+            console.log(`✏️ საწყისი ჩანაწერების ცვლილებები: ${snapshot.size}`);
+            rebuildDoctorsList();
+          },
+          (error) => {
+            console.error('❌ doctor_overrides onSnapshot error:', error);
+            showMessage('საწყისი ჩანაწერების ცვლილებები ვერ ჩაიტვირთა', 'error');
+          }
+        );
       } catch (error) {
         console.error('❌ ექიმების ჩატვირთვა ვერ მოხერხდა:', error);
         showMessage('მონაცემების ჩატვირთვა ვერ მოხერხდა', 'error');
-        populateSpecialtyFilter();
-        renderDoctors();
+        rebuildDoctorsList();
       }
     }
 
@@ -971,6 +1129,35 @@
       }
     }
 
+    async function updateDoctorInFirebase(targetDoctor, doctorData) {
+      if (!isFirebaseConnected) {
+        showMessage('Firebase არ არის დაკავშირებული', 'error');
+        return false;
+      }
+
+      try {
+        if (targetDoctor.isInitial) {
+          await setDoc(doc(db, 'doctor_overrides', targetDoctor.sourceKey), {
+            ...doctorData,
+            updatedAt: serverTimestamp()
+          });
+        } else {
+          await updateDoc(doc(db, 'doctors', targetDoctor.id), {
+            ...doctorData,
+            updatedAt: serverTimestamp()
+          });
+        }
+
+        console.log('✅ ექიმის მონაცემები განახლდა');
+        showMessage('ექიმის მონაცემები განახლდა', 'success');
+        return true;
+      } catch (error) {
+        console.error('❌ ექიმის განახლება ვერ მოხერხდა:', error);
+        showMessage('ექიმის განახლება ვერ მოხერხდა', 'error');
+        return false;
+      }
+    }
+
     // Show success/error message
     function showMessage(message, type) {
       const messageEl = document.getElementById('success-message');
@@ -983,36 +1170,118 @@
       }, 3000);
     }
 
-    // Modal functionality
+    // Modal/Admin functionality
     const modal = document.getElementById('add-doctor-modal');
     const addBtn = document.getElementById('add-doctor-btn');
     const closeBtn = document.getElementsByClassName('close')[0];
     const cancelBtn = document.getElementById('cancel-btn');
     const form = document.getElementById('add-doctor-form');
+    const modalTitle = document.getElementById('modal-title');
+    const submitBtn = document.getElementById('submit-btn');
+    const adminLoginBtn = document.getElementById('admin-login-btn');
+    const adminLogoutBtn = document.getElementById('admin-logout-btn');
+
+    function ensureAdminMode() {
+      if (isAdminMode) {
+        return true;
+      }
+      showMessage('რედაქტირებისთვის საჭიროა ადმინის შესვლა', 'error');
+      return false;
+    }
+
+    function setAdminMode(enabled) {
+      isAdminMode = enabled;
+      document.body.classList.toggle('admin-mode', enabled);
+      adminLoginBtn.style.display = enabled ? 'none' : 'inline-flex';
+      adminLogoutBtn.style.display = enabled ? 'inline-flex' : 'none';
+
+      if (!enabled) {
+        editingDoctor = null;
+        closeModal();
+      }
+
+      renderDoctors();
+    }
+
+    function requestAdminAccess() {
+      const enteredPassword = window.prompt('შეიყვანეთ ადმინის პაროლი');
+      if (enteredPassword === null) {
+        return;
+      }
+
+      if (enteredPassword === ADMIN_PASSWORD) {
+        setAdminMode(true);
+        showMessage('ადმინის რეჟიმი გააქტიურდა', 'success');
+      } else {
+        showMessage('პაროლი არასწორია', 'error');
+      }
+    }
+
+    function openAddModal() {
+      if (!ensureAdminMode()) {
+        return;
+      }
+      editingDoctor = null;
+      modalTitle.textContent = 'ახალი ექიმის დამატება';
+      submitBtn.textContent = 'დამატება';
+      form.reset();
+      hideErrors();
+      modal.style.display = 'block';
+    }
+
+    function openEditModal(doctor) {
+      if (!ensureAdminMode()) {
+        return;
+      }
+
+      editingDoctor = doctor;
+      modalTitle.textContent = 'ნომრის რედაქტირება';
+      submitBtn.textContent = 'შენახვა';
+      document.getElementById('doctor-name').value = doctor.name || '';
+      document.getElementById('doctor-specialty').value = doctor.specialty || '';
+      document.getElementById('doctor-phone').value = doctor.phone || '';
+      document.getElementById('doctor-comment').value = doctor.comment || '';
+      hideErrors();
+      modal.style.display = 'block';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+      form.reset();
+      hideErrors();
+    }
 
     console.log('Modal elements:', { modal, addBtn, closeBtn, cancelBtn, form });
 
     addBtn.onclick = function(e) {
       e.preventDefault();
-      console.log('Add button clicked!');
-      modal.style.display = 'block';
-      form.reset();
-      hideErrors();
+      openAddModal();
+    }
+
+    adminLoginBtn.onclick = function(e) {
+      e.preventDefault();
+      requestAdminAccess();
+    }
+
+    adminLogoutBtn.onclick = function(e) {
+      e.preventDefault();
+      setAdminMode(false);
+      showMessage('ადმინის რეჟიმი გაითიშა', 'success');
     }
 
     closeBtn.onclick = function(e) {
       e.preventDefault();
-      modal.style.display = 'none';
+      closeModal();
     }
 
     cancelBtn.onclick = function(e) {
       e.preventDefault();
-      modal.style.display = 'none';
+      closeModal();
     }
 
     window.onclick = function(event) {
       if (event.target == modal) {
-        modal.style.display = 'none';
+        closeModal();
       }
     }
 
@@ -1020,9 +1289,14 @@
       e.preventDefault();
       console.log('Form submitted!');
 
+      if (!ensureAdminMode()) {
+        return;
+      }
+
       const name = document.getElementById('doctor-name').value.trim();
       const specialty = document.getElementById('doctor-specialty').value;
       const phone = document.getElementById('doctor-phone').value.trim();
+      const comment = document.getElementById('doctor-comment').value.trim();
 
       let isValid = true;
       hideErrors();
@@ -1042,25 +1316,23 @@
         isValid = false;
       }
 
-      if (isValid) {
-        // 🚫 Duplicate check (name OR phone)
-        if (doctorAlreadyExists(name, phone)) {
-          showMessage('ექიმი უკვე დამატებულია', 'error');
-          return;
-        }
+      if (!isValid) {
+        return;
+      }
 
-        const newDoctor = {
-          name: name,
-          specialty: specialty,
-          phone: phone
-        };
+      if (doctorAlreadyExists(name, phone, editingDoctor ? editingDoctor.sourceKey : null)) {
+        showMessage('ექიმი უკვე დამატებულია', 'error');
+        return;
+      }
 
-        const success = await addDoctorToFirebase(newDoctor);
+      const payload = { name, specialty, phone, comment };
+      const success = editingDoctor
+        ? await updateDoctorInFirebase(editingDoctor, payload)
+        : await addDoctorToFirebase(payload);
 
-        if (success) {
-          modal.style.display = 'none';
-          form.reset();
-        }
+      if (success) {
+        editingDoctor = null;
+        closeModal();
       }
     }
 
@@ -1164,7 +1436,30 @@
         link.textContent = d.phone;
 
         phone.appendChild(link);
+
         card.append(name, specEl, phone);
+
+        if (d.comment) {
+          const comment = document.createElement('div');
+          comment.className = 'doctor-comment';
+          comment.textContent = d.comment;
+          card.appendChild(comment);
+        }
+
+        if (isAdminMode) {
+          const actions = document.createElement('div');
+          actions.className = 'doctor-actions';
+
+          const editBtn = document.createElement('button');
+          editBtn.type = 'button';
+          editBtn.className = 'card-edit-btn';
+          editBtn.textContent = 'რედაქტირება';
+          editBtn.addEventListener('click', () => openEditModal(d));
+
+          actions.appendChild(editBtn);
+          card.appendChild(actions);
+        }
+
         list.appendChild(card);
       });
     }
