@@ -24,6 +24,12 @@
     }
     
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      width: 100%;
+      overflow-x: hidden;
+      -webkit-text-size-adjust: 100%;
+    }
     
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -33,6 +39,8 @@
       line-height: 1.6;
       display: flex;
       flex-direction: column;
+      width: 100%;
+      overflow-x: hidden;
     }
     
     /* Firebase Connection Status */
@@ -50,6 +58,14 @@
       gap: 8px;
       z-index: 10;
       transition: all 0.3s ease;
+      max-width: calc(100vw - 20px);
+    }
+
+    #status-text {
+      max-width: 240px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     
     .firebase-status.connected {
@@ -144,6 +160,7 @@
       letter-spacing: -0.5px; 
       color: var(--dark-blue);
       line-height: 1.3;
+      word-break: break-word;
     }
     
     .subtitle { 
@@ -159,6 +176,7 @@
       border-radius: 16px;
       box-shadow: var(--shadow-sm);
       margin-bottom: 32px;
+      width: 100%;
     }
 
     .controls { 
@@ -328,6 +346,7 @@
       display: grid; 
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
       gap: 24px; 
+      width: 100%;
     }
     
     .no-results { 
@@ -626,6 +645,15 @@
       .controls {
         grid-template-columns: 1fr;
       }
+
+      .controls-wrapper {
+        position: sticky;
+        top: 8px;
+        z-index: 8;
+        margin-bottom: 18px;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(6px);
+      }
       
       .action-buttons {
         width: 100%;
@@ -644,21 +672,158 @@
     }
 
     @media (max-width: 768px) {
-      .container { padding: 24px 16px; }
-      h1 { font-size: 24px; }
-      .subtitle { font-size: 16px; }
-      header { padding: 56px 20px 24px; }
-      .controls-wrapper { padding: 20px; }
-      .sort-controls { flex-wrap: wrap; gap: 8px; }
+      .container { padding: 12px 10px; }
+      h1 { font-size: 19px; line-height: 1.25; margin-bottom: 4px; }
+      .subtitle { font-size: 13px; }
+      header {
+        padding: 54px 12px 14px;
+        margin-bottom: 14px;
+        border-left-width: 3px;
+      }
+      .controls-wrapper {
+        padding: 12px;
+        border-radius: 12px;
+        margin-bottom: 14px;
+      }
+      .controls {
+        gap: 10px;
+        margin-bottom: 12px;
+      }
+      .search-box input, .filter-box select {
+        font-size: 14px;
+        padding: 12px;
+      }
+      .action-buttons {
+        gap: 8px;
+      }
+      .action-buttons button {
+        padding: 10px 10px;
+        font-size: 14px;
+      }
+      .sort-controls {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+      .sort-btn {
+        width: 100%;
+        padding: 10px 8px;
+        font-size: 12px;
+      }
       .doctors-list { grid-template-columns: 1fr; }
-      .modal-content { padding: 28px 24px; }
+      .doctors-list { gap: 10px; }
+      .doctor-card {
+        padding: 14px 12px;
+        border-radius: 12px;
+      }
+      .doctor-card::before {
+        width: 3px;
+      }
+      .doctor-card:hover {
+        transform: none;
+        box-shadow: var(--shadow-sm);
+      }
+      .doctor-name {
+        font-size: 18px;
+        margin-bottom: 6px;
+      }
+      .doctor-specialty {
+        font-size: 12px;
+        margin-bottom: 8px;
+        padding: 4px 8px;
+      }
+      .doctor-phone {
+        font-size: 16px;
+      }
+      .doctor-comment {
+        margin-top: 8px;
+        font-size: 12px;
+        padding: 5px 8px;
+      }
+      .doctor-actions {
+        margin-top: 10px;
+      }
+      .card-edit-btn {
+        width: 100%;
+      }
+      .modal-content {
+        left: 50%;
+        top: auto;
+        bottom: 0;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 100%;
+        border-radius: 18px 18px 0 0;
+        padding: 18px 14px 20px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      .modal-header {
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+      }
+      .modal-header h2 {
+        font-size: 20px;
+      }
+      .form-group {
+        margin-bottom: 14px;
+      }
+      .form-group label {
+        font-size: 12px;
+      }
+      .form-group input,
+      .form-group select {
+        padding: 12px;
+        font-size: 14px;
+      }
+      .modal-buttons {
+        margin-top: 18px;
+        gap: 8px;
+        flex-direction: column-reverse;
+      }
+      .modal-buttons button {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+      }
       .admin-controls {
         top: 10px;
         right: 10px;
+        gap: 6px;
       }
       .admin-btn {
-        padding: 6px 12px;
+        padding: 6px 10px;
         font-size: 12px;
+      }
+      .firebase-status {
+        top: 6px;
+        right: 6px;
+        padding: 6px 10px;
+        border-radius: 16px;
+        font-size: 11px;
+      }
+      .status-dot {
+        width: 8px;
+        height: 8px;
+      }
+      #status-text {
+        max-width: 115px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      h1 {
+        font-size: 17px;
+      }
+      .admin-btn {
+        padding: 5px 8px;
+        font-size: 11px;
+      }
+      .doctor-name {
+        font-size: 16px;
+      }
+      .doctor-phone {
+        font-size: 15px;
       }
     }
   </style>
