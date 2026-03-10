@@ -860,7 +860,7 @@
             </select>
           </div>
           <div class="action-buttons">
-            <button id="refresh-btn" type="button"><span id="refresh-text">განახლება</span></button>
+            <button id="clear-filters-btn" type="button">გასუფთავება</button>
             <button id="add-doctor-btn" type="button" data-admin-only>+ დამატება</button>
           </div>
         </div>
@@ -1511,13 +1511,21 @@
       });
     }
 
+    function clearFilters() {
+      document.getElementById('search-input').value = '';
+      document.getElementById('specialty-filter').value = '';
+      currentSort = 'name';
+      toggleSortActive('sort-name');
+      renderDoctors();
+    }
+
     function setupEventListeners() {
       document.getElementById('search-input').addEventListener('input', renderDoctors);
       document.getElementById('specialty-filter').addEventListener('change', function(e) {
         console.log('Specialty changed:', e.target.value);
         renderDoctors();
       });
-      document.getElementById('refresh-btn').addEventListener('click', loadDoctorsFromFirebase);
+      document.getElementById('clear-filters-btn').addEventListener('click', clearFilters);
       document.getElementById('sort-name').addEventListener('click', () => { 
         currentSort = 'name'; 
         toggleSortActive('sort-name'); 
