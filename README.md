@@ -901,7 +901,9 @@
             <option value="">აირჩიეთ განყოფილება</option>
             <option>CT ოპერატორი</option>
             <option>CT რადიოლოგი</option>
-             <option>MRT რადიოლოგი</option>
+            <option>MRI რადიოლოგი</option>
+            <option>MRT რადიოლოგი</option>
+            <option>ადმინისტრაცია</option>
             <option>ანგიოქირურგია</option>
             <option>ანესთეზია</option>
             <option>ბავშვთა გადაუდებელი მედიცინა</option>
