@@ -902,7 +902,6 @@
             <option>CT ოპერატორი</option>
             <option>CT რადიოლოგი</option>
             <option>MRI რადიოლოგი</option>
-            <option>MRT რადიოლოგი</option>
             <option>ადმინისტრაცია</option>
             <option>ანგიოქირურგია</option>
             <option>ანესთეზია</option>
