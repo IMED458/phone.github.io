@@ -1547,7 +1547,14 @@
     }
 
     function populateSpecialtyFilter() {
-      const uniq = [...new Set(allDoctors.map(d => d.specialty))].sort((a,b) => a.localeCompare(b,'ka'));
+      const formSpecialties = [...document.querySelectorAll('#doctor-specialty option')]
+        .map((option) => (option.value || option.textContent || '').trim())
+        .filter(Boolean);
+      const doctorSpecialties = allDoctors
+        .map((doctor) => String(doctor.specialty || '').trim())
+        .filter(Boolean);
+      const uniq = [...new Set([...formSpecialties, ...doctorSpecialties])]
+        .sort((a, b) => a.localeCompare(b, 'ka'));
       const sel = document.getElementById('specialty-filter');
       const currentValue = sel.value;
       sel.innerHTML = '<option value="">ყველა სპეციალობა</option>';
