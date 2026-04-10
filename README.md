@@ -1,7 +1,7 @@
 <html lang="ka">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Medical Directory</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="shortcut icon" href="favicon.svg">
@@ -29,6 +29,7 @@
       width: 100%;
       overflow-x: hidden;
       -webkit-text-size-adjust: 100%;
+      scroll-behavior: smooth;
     }
     
     body {
@@ -41,6 +42,16 @@
       flex-direction: column;
       width: 100%;
       overflow-x: hidden;
+      min-height: 100dvh;
+      overscroll-behavior-x: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    input,
+    select,
+    button,
+    a {
+      touch-action: manipulation;
     }
     
     /* Firebase Connection Status */
@@ -101,6 +112,7 @@
       margin: 0 auto; 
       padding: 40px 32px; 
       flex: 1; 
+      width: 100%;
     }
     
     header { 
@@ -203,6 +215,8 @@
       color: var(--text-color);
       transition: all 0.2s ease;
       font-weight: 500;
+      min-height: 52px;
+      appearance: none;
     }
     
     .search-box input:focus, .filter-box select:focus {
@@ -234,6 +248,7 @@
       transition: all 0.2s ease; 
       box-shadow: var(--shadow-sm);
       white-space: nowrap;
+      min-height: 48px;
     }
     
     button:hover { 
@@ -423,6 +438,10 @@
       border-bottom: 2px solid transparent;
       transition: all 0.2s ease;
       padding-bottom: 2px;
+      display: inline-flex;
+      align-items: center;
+      min-height: 44px;
+      overflow-wrap: anywhere;
     }
     
     .doctor-phone a:hover { 
@@ -477,6 +496,7 @@
       background-color: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(4px);
       animation: fadeIn 0.2s ease;
+      overscroll-behavior: contain;
     }
     
     @keyframes fadeIn {
@@ -508,6 +528,8 @@
       width: 90%;
       animation: slideUp 0.3s ease;
       z-index: 1001;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
     }
     
     .modal-header {
@@ -648,7 +670,7 @@
 
       .controls-wrapper {
         position: sticky;
-        top: 8px;
+        top: calc(env(safe-area-inset-top) + 8px);
         z-index: 8;
         margin-bottom: 18px;
         background: rgba(255, 255, 255, 0.98);
@@ -672,13 +694,24 @@
     }
 
     @media (max-width: 768px) {
-      .container { padding: 12px 10px; }
-      h1 { font-size: 19px; line-height: 1.25; margin-bottom: 4px; }
+      .container {
+        padding-top: calc(env(safe-area-inset-top) + 10px);
+        padding-right: calc(env(safe-area-inset-right) + 10px);
+        padding-bottom: calc(env(safe-area-inset-bottom) + 16px);
+        padding-left: calc(env(safe-area-inset-left) + 10px);
+      }
+      h1 { font-size: 18px; line-height: 1.22; margin-bottom: 4px; }
       .subtitle { font-size: 13px; }
       header {
-        padding: 54px 12px 14px;
+        padding: 14px 12px 14px;
         margin-bottom: 14px;
         border-left-width: 3px;
+      }
+      .admin-controls {
+        position: static;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
       }
       .controls-wrapper {
         padding: 12px;
@@ -690,24 +723,35 @@
         margin-bottom: 12px;
       }
       .search-box input, .filter-box select {
-        font-size: 14px;
+        font-size: 16px;
         padding: 12px;
+        min-height: 50px;
       }
       .action-buttons {
         gap: 8px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
       }
       .action-buttons button {
         padding: 10px 10px;
         font-size: 14px;
+        width: 100%;
       }
       .sort-controls {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
         gap: 8px;
+        padding-bottom: 2px;
+        -webkit-overflow-scrolling: touch;
+      }
+      .sort-controls::-webkit-scrollbar {
+        display: none;
       }
       .sort-btn {
-        width: 100%;
-        padding: 10px 8px;
+        flex: 0 0 auto;
+        min-width: 150px;
+        padding: 10px 12px;
         font-size: 12px;
       }
       .doctors-list { grid-template-columns: 1fr; }
@@ -754,8 +798,8 @@
         width: 100%;
         max-width: 100%;
         border-radius: 18px 18px 0 0;
-        padding: 18px 14px 20px;
-        max-height: 90vh;
+        padding: 18px 14px calc(20px + env(safe-area-inset-bottom));
+        max-height: min(90dvh, 720px);
         overflow-y: auto;
       }
       .modal-header {
@@ -786,28 +830,28 @@
         padding: 12px;
         font-size: 14px;
       }
-      .admin-controls {
-        top: 10px;
-        right: 10px;
-        gap: 6px;
-      }
       .admin-btn {
-        padding: 6px 10px;
+        padding: 8px 12px;
         font-size: 12px;
+        min-height: 42px;
       }
       .firebase-status {
-        top: 6px;
-        right: 6px;
+        top: auto;
+        left: 50%;
+        right: auto;
+        bottom: calc(env(safe-area-inset-bottom) + 8px);
+        transform: translateX(-50%);
         padding: 6px 10px;
         border-radius: 16px;
         font-size: 11px;
+        max-width: calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 16px);
       }
       .status-dot {
         width: 8px;
         height: 8px;
       }
       #status-text {
-        max-width: 115px;
+        max-width: 140px;
       }
     }
 
@@ -815,15 +859,37 @@
       h1 {
         font-size: 17px;
       }
+      .container {
+        padding-right: calc(env(safe-area-inset-right) + 8px);
+        padding-left: calc(env(safe-area-inset-left) + 8px);
+      }
       .admin-btn {
-        padding: 5px 8px;
+        padding: 7px 10px;
         font-size: 11px;
+      }
+      .sort-btn {
+        min-width: 136px;
       }
       .doctor-name {
         font-size: 16px;
       }
       .doctor-phone {
         font-size: 15px;
+      }
+      #status-text {
+        max-width: 120px;
+      }
+    }
+
+    @media (max-height: 740px) and (max-width: 768px) {
+      header {
+        margin-bottom: 10px;
+      }
+      .controls-wrapper {
+        padding: 10px;
+      }
+      .modal-content {
+        max-height: 94dvh;
       }
     }
   </style>
